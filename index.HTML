@@ -1,0 +1,1964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini App KING OF APPLE HACK</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            background-image: url('fond_pro.jpg'); /* Arrière-plan par défaut */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            overflow: hidden; /* Empêche le défilement général de la page */
+            color: #ffffff; /* Couleur de texte par défaut */
+        }
+
+        /* --- Écran de chargement --- */
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('fond_pro.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        #loading-logo {
+            width: 450px;
+            height: auto;
+            max-width: 90%;
+            animation: zoomLogo 1s ease-in-out infinite alternate;
+            margin-bottom: 20px;
+        }
+
+        @keyframes zoomLogo {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.2); }
+        }
+
+        #loading-text {
+            color: white;
+            font-size: 1.5em;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* --- Contenu principal (cache par défaut) --- */
+        #main-content {
+            display: none; /* Caché par défaut */
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            padding-top: 10px; /* Réduit le padding global du contenu principal */
+        }
+
+        /* --- Styles généraux des conteneurs de page --- */
+        .page-container {
+            display: none; /* Toutes les pages sont cachées par défaut */
+            flex-direction: column;
+            align-items: center;
+            width: 90%;
+            max-width: 500px;
+            background-color: rgba(0, 0, 0, 0.7); /* Fond noir par default pour la plupart des pages */
+            border-radius: 15px;
+            padding: 15px; /* Réduit le padding général des pages */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            margin-bottom: 10px; /* Réduit la marge en bas */
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+            box-sizing: border-box;
+            flex-grow: 1;
+            min-height: 0; /* Important pour les flex-items */
+        }
+
+        /* Spécifique pour la page du menu principal */
+        #menu-page {
+            background-image: url('fon.jpg'); /* Utilisez l'image 'fon' */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Spécifique pour la page de jeu : pas de fond noir */
+        #game-page {
+            background-color: transparent; /* Retire le fond noir pour cette page */
+            box-shadow: none; /* Retire l'ombre pour cette page */
+            padding: 0.8vh 0; /* Padding vertical réduit au minimum */
+            gap: 0.7vh; /* Réduit l'espacement entre les blocs principaux */
+            height: 98vh; /* Permet à la page de jeu de prendre presque toute la hauteur */
+            max-height: 98vh; /* Limite la hauteur pour éviter le débordement */
+            justify-content: space-between; /* Distribue l'espace pour éviter le chevauchement */
+        }
+
+        /* Spécifique pour le débordement des pages d'info si elles sont grandes */
+        #about-page, #create-account-page, #results-page, #instructions-page {
+            justify-content: flex-start; /* Aligner le contenu en haut */
+            overflow-y: auto; /* Permet le défilement si le contenu est trop grand */
+            padding-bottom: 15px; /* Ajoute un peu de padding en bas si scroll */
+            background-color: rgba(0, 0, 0, 0.8); /* Fond un peu plus sombre pour le texte blanc */
+        }
+
+        /* Style spécifique pour la page d'instructions pour un meilleur contraste */
+        #instructions-page {
+            background-color: rgba(0, 0, 0, 0.85);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .page-container h2 {
+            color: #fbc02d;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .page-container p {
+            font-size: 0.95em;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        /* --- Menu principal --- */
+        #menu-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+            max-width: 250px;
+            margin-top: 30px;
+        }
+
+        #menu-container button {
+            padding: 12px 20px;
+            font-size: 1.1em;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        #menu-container button:hover {
+            background-color: #45a049;
+            transform: translateY(-1px);
+        }
+
+        #menu-footer-text {
+            color: #ccc;
+            font-size: 0.8em;
+            margin-top: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Ajout d'une ombre pour la lisibilité */
+        }
+
+        /* --- Album photo sur la page Résultats --- */
+        #results-page #photo-album-container {
+            width: 90%; /* Ajustez selon besoin */
+            max-width: 350px; /* Taille maximale basée sur l'espace de jeu */
+            height: auto; /* La hauteur s'adapte au ratio de l'image */
+            max-height: 300px; /* Hauteur maximale approximative de l'espace de jeu */
+            margin: 20px auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            box-sizing: border-box;
+            flex-grow: 1; /* Permet au conteneur de s'étirer */
+        }
+
+        #results-page #photo-album-results {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+        }
+
+        #results-page #current-image-results {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* L'image s'adapte sans être coupée */
+            display: block;
+            border-radius: 8px;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .album-nav-btn {
+            background-color: rgb(0, 0, 0);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 1.5em;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            transition: background-color 0.3s ease;
+        }
+
+        .album-nav-btn:hover {
+            background-color: rgb(255, 255, 255);
+        }
+
+        #prev-photo-btn-results {
+            left: 5px;
+        }
+
+        #next-photo-btn-results {
+            right: 5px;
+        }
+
+        /* Conteneur pour les textes en bas */
+        #bottom-text-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6vh; /* Réduit l'espace entre le texte défilant et le lien */
+            flex-shrink: 0;
+        }
+
+        /* Conteneur pour le texte défilant */
+        #scrolling-text-container {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 0.6vh 0; /* Padding vertical réduit */
+            margin: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            border-radius: 5px;
+        }
+
+        #scrolling-text {
+            display: inline-block;
+            color: #E0E0E0;
+            font-size: 0.85em; /* Taille de police réduite */
+            padding-left: 100%;
+            animation: scrollText 20s linear infinite;
+        }
+
+        @keyframes scrollText {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Nouveau texte clignotant pour l'inscription */
+        #register-link-container {
+            width: 100%;
+            text-align: center;
+            margin: 0;
+            padding: 0.4vh; /* Padding réduit */
+        }
+
+        #register-link {
+            display: inline-block;
+            color: white;
+            font-size: 1em; /* Taille de police réduite */
+            font-weight: bold;
+            text-decoration: underline;
+            cursor: pointer;
+            animation: blink 1s infinite alternate;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+
+        .game-wrapper {
+            flex-grow: 1; /* Prend l'espace disponible maximal */
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.2vh 0; /* Très petit padding vertical pour optimiser */
+            min-height: 0;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .game-area {
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 0.7vh; /* Espacement entre les rangées légèrement réduit */
+            background-color: rgba(27, 94, 32, 0.8);
+            padding: 1.2vh; /* Padding de la zone de jeu légèrement réduit */
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            max-width: fit-content;
+            box-sizing: border-box;
+            flex-shrink: 0;
+        }
+
+        .game-row {
+            display: flex;
+            gap: 0.5vh; /* Espacement entre les cercles légèrement réduit */
+            justify-content: center;
+        }
+
+        .circle {
+            width: 7.2vh; /* Taille des cercles augmentée pour remplir l'espace */
+            height: 7.2vh;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            border: 1px solid #64dd17;
+            transition: background-image 0.3s ease-in-out;
+            cursor: pointer;
+            flex-shrink: 0;
+            box-sizing: border-box;
+        }
+
+        .game-buttons-container {
+            width: 100%;
+            padding: 0.8vh; /* Padding réduit */
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8vh; /* Espacement entre les boutons réduit */
+            justify-content: center;
+            background-image: url('fond_pro.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            position: relative;
+            z-index: 10;
+            flex-shrink: 0;
+        }
+
+        .game-buttons-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(46, 125, 50, 0.7);
+            z-index: -1;
+        }
+
+        .game-buttons-container button {
+            padding: 1vh 2.2vh; /* Padding des boutons légèrement réduit */
+            font-size: 0.95em; /* Taille de police des boutons légèrement réduite */
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+            flex-grow: 1;
+            max-width: 160px; /* Taille maximale des boutons légèrement réduite */
+        }
+
+        button#newGameBtn { background-color: #fbc02d; }
+        button#newGameBtn:hover { background-color: #f9a825; }
+
+        button#showAppleBtn { background-color: #d32f2f; }
+        button#showAppleBtn:hover { background-color: #c62828; }
+
+        button#backToMenuBtn {
+            background-color: #607D8B;
+        }
+        button#backToMenuBtn:hover {
+            background-color: #546E7A;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* --- Styles pour la page d'instructions déroulantes --- */
+        #instructions-page {
+            overflow-y: auto; /* Permet le défilement si le contenu est trop long */
+            background-color: rgba(0, 0, 0, 0.85); /* Fond blanc remplacé par noir semi-transparent */
+            color: white; /* Texte noir remplacé par blanc */
+        }
+
+        #instructions-page h2 {
+            color: #fbc02d; /* Couleur du titre principal sur fond noir */
+        }
+
+        .instruction-section {
+            margin-bottom: 20px;
+            width: 100%; /* Prend toute la largeur disponible dans le conteneur */
+        }
+
+        .instruction-title {
+            color: white; /* Texte du titre sur fond noir */
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            cursor: pointer;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.1); /* Fond gris clair remplacé par blanc semi-transparent */
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold; /* Titres en gras */
+        }
+
+        .instruction-title:hover {
+            background-color: rgba(255, 255, 255, 0.2); /* Gris plus foncé au survol remplacé par blanc plus opaque */
+            transform: translateY(-2px);
+        }
+
+        .instruction-title .arrow {
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+
+        .instruction-title.active .arrow {
+            transform: rotate(90deg); /* Flèche vers le bas quand active */
+        }
+
+        .instruction-content {
+            display: none; /* Masqué par défaut */
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.7); /* Fond presque blanc remplacé par noir semi-transparent */
+            border-radius: 8px;
+            font-size: 0.9em;
+            line-height: 1.6;
+            text-align: left; /* Alignement du texte à gauche pour la lecture */
+            color: #eee; /* Texte un peu plus foncé pour la lisibilité remplacé par gris clair */
+        }
+
+        .instruction-content p {
+            margin-bottom: 10px; /* Espacement entre les paragraphes */
+            text-align: left;
+        }
+
+        .instruction-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Styles pour les liens cliquables des bookmakers dans les instructions */
+        .instruction-content .bookmaker-link {
+            color: #00bfff; /* Couleur de lien bleu clair */
+            text-decoration: underline;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .instruction-content .bookmaker-link:hover {
+            color: #40c4ff; /* Couleur de lien bleu clair au survol */
+        }
+
+        /* --- Styles pour les placeholders de GIF (Taille portable) --- */
+        .gif-container {
+            width: 90%; /* Nouvelle largeur pour correspondre à l'album */
+            max-width: 350px; /* Nouvelle largeur maximale pour correspondre à l'album */
+            height: auto; /* La hauteur s'adapte au ratio de l'image */
+            max-height: 300px; /* Nouvelle hauteur maximale pour correspondre à l'album */
+            margin: 20px auto 10px; /* Marge pour alignement */
+            position: relative;
+            display: flex;
+            flex-direction: column; /* Garde la structure flex pour l'image */
+            align-items: center;
+            justify-content: center;
+            background-color: transparent; /* Supprime le fond */
+            border-radius: 10px; /* Conserve les bords arrondis */
+            padding: 0; /* Supprime le padding */
+            box-shadow: none; /* Supprime l'ombre */
+            box-sizing: border-box;
+            flex-grow: 1;
+        }
+
+        .gif-label {
+            display: none; /* Supprime l'affichage du titre GIF/GIFF */
+        }
+
+        .gif-placeholder {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.15); /* Optionnel: léger fond pour le placeholder si l'image ne charge pas */
+            border: none; /* Supprime la bordure en pointillés */
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #eee;
+            font-size: 0.9em;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .gif-placeholder img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+            border-radius: 8px;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+
+        /* --- Styles pour les boutons des bookmakers (dans Créer un compte) --- */
+        .bookmaker-buttons-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* Espace entre chaque groupe de bookmaker réduit */
+            margin-top: 10px; /* Marge du haut réduite */
+        }
+
+        .bookmaker-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px; /* Bords légèrement moins arrondis */
+            padding: 8px; /* Padding réduit */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Ombre plus subtile */
+        }
+
+        .bookmaker-main-button {
+            width: 100%;
+            padding: 10px 15px; /* Padding réduit */
+            font-size: 1em; /* Taille de police légèrement réduite */
+            font-weight: bold;
+            border: none;
+            border-radius: 6px; /* Bords moins arrondis */
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-bottom: 8px; /* Espace entre le bouton principal et les sous-boutons réduit */
+        }
+
+        .bookmaker-main-button:hover {
+            transform: translateY(-1px); /* Moins de translation au survol */
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3); /* Ombre réduite au survol */
+        }
+
+        /* Couleurs spécifiques pour chaque bookmaker */
+        .btn-1xbet { background-color: #007bff; color: white; } /* Bleu */
+        .btn-melbet { background-color: #FFD700; color: black; } /* Jaune */
+        .btn-betwinner { background-color: #28a745; color: white; } /* Vert */
+        .btn-megapari { background-color: #343a40; color: white; } /* Noir */
+
+        .bookmaker-sub-buttons {
+            display: flex;
+            flex-wrap: wrap; /* Pour gérer le débordement sur petites écrans */
+            justify-content: center;
+            gap: 6px; /* Espace entre les sous-boutons réduit */
+            width: 100%;
+        }
+
+        .bookmaker-sub-buttons button {
+            padding: 6px 10px; /* Padding réduit */
+            font-size: 0.8em; /* Taille de police réduite */
+            border: none;
+            border-radius: 4px; /* Bords moins arrondis */
+            color: white;
+            cursor: pointer;
+            background-color: #555; /* Couleur par défaut pour les sous-boutons légèrement plus claire */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            flex-grow: 0; /* Ne pas laisser les boutons s'étirer autant */
+            max-width: 100px; /* Largeur maximale réduite */
+        }
+
+        .bookmaker-sub-buttons button:hover {
+            background-color: #777; /* Couleur au survol légèrement plus claire */
+            transform: translateY(-1px);
+        }
+
+        /* Styles pour les codes promo */
+        .promo-code-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 15px; /* Espace au-dessus du conteneur des codes promo */
+            margin-bottom: 20px; /* Espace en dessous du conteneur des codes promo */
+            width: 100%;
+            max-width: 350px; /* Aligné avec la largeur des GIFs */
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.6); /* Fond semi-transparent pour le contraste */
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .promo-code-text {
+            color: #fbc02d; /* Couleur d'accent pour le texte principal */
+            font-size: 1.1em; /* Taille moyenne */
+            font-weight: bold;
+            margin-bottom: 10px; /* Espace entre le texte et les boutons */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+            text-align: center;
+        }
+
+        .promo-code-buttons {
+            display: flex;
+            gap: 15px; /* Espace entre les boutons de code */
+            justify-content: center;
+            width: 100%;
+        }
+
+        .copy-code-btn {
+            padding: 8px 15px;
+            font-size: 1em; /* Taille de texte moyenne pour les boutons */
+            font-weight: bold;
+            background-color: #4CAF50; /* Couleur verte similaire aux boutons de menu */
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            flex-grow: 1; /* Permet aux boutons de s'étirer */
+            max-width: 120px; /* Limite la largeur des boutons */
+        }
+
+        .copy-code-btn:hover {
+            background-color: #45a049;
+            transform: translateY(-1px);
+        }
+
+        /* Styles pour le sélecteur de langue */
+        #language-selector {
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        #language-selector button {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-size: 0.9em;
+            color: #ccc;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        #language-selector button img {
+            width: 30px;
+            height: 20px;
+            margin-right: 5px;
+            border: 1px solid #555;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        #language-selector button:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        #language-selector button.active {
+            color: #fbc02d;
+            font-weight: bold;
+            transform: scale(1.1);
+        }
+
+
+        /* --- Media queries pour les petites tailles d'écran (ajustements pour maximiser la visibilité) --- */
+        @media (max-width: 768px) {
+            #scrolling-text { font-size: 0.8em; }
+            #register-link { font-size: 0.9em; }
+            .circle { width: 6.8vh; height: 6.8vh; }
+            .game-area { padding: 1vh; gap: 0.6vh; }
+            .game-row { gap: 0.4vh; }
+            .game-buttons-container button { padding: 0.9vh 1.8vh; font-size: 0.85em; max-width: 150px; }
+            #game-page { gap: 0.7vh; padding: 1vh 0; }
+            #bottom-text-container { gap: 0.5vh; }
+            #scrolling-text-container { padding: 0.5vh 0;}
+            #register-link-container { padding: 0.3vh;}
+
+            /* Ajustements pour la page de création de compte sur mobile */
+            .bookmaker-main-button { font-size: 1em; padding: 10px 15px; }
+            .bookmaker-sub-buttons button { font-size: 0.8em; padding: 7px 10px; max-width: 100px; }
+            .instruction-title { font-size: 1.2em; }
+            .instruction-content { font-size: 0.85em; }
+            .gif-container { margin-bottom: 10px; max-width: 300px; height: auto; max-height: 250px; } /* Ajustement mobile */
+            .gif-placeholder { max-width: 100%; height: 100%; }
+
+            /* Media query pour les codes promo */
+            .promo-code-text {
+                font-size: 1.05em;
+            }
+            .copy-code-btn {
+                font-size: 0.9em;
+                padding: 7px 12px;
+            }
+            .promo-code-container {
+                margin-top: 12px;
+                margin-bottom: 15px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            #scrolling-text { font-size: 0.75em; }
+            #register-link { font-size: 0.85em; }
+            .circle { width: 6.5vh; height: 6.5vh; }
+            .game-area { padding: 0.8vh; gap: 0.5vh; }
+            .game-row { gap: 0.3vh; }
+            .game-buttons-container button { padding: 0.7vh 1.4vh; font-size: 0.8em; max-width: 130px; }
+            #game-page { gap: 0.6vh; padding: 0.8vh 0; }
+            #bottom-text-container { gap: 0.4vh; }
+            #scrolling-text-container { padding: 0.4vh 0;}
+            #register-link-container { padding: 0.2vh;}
+
+            /* Ajustements pour la page de création de compte sur très petits mobiles */
+            .bookmaker-main-button { font-size: 0.95em; padding: 8px 12px; }
+            .bookmaker-sub-buttons button { font-size: 0.75em; padding: 6px 8px; max-width: 90px; }
+            .instruction-title { font-size: 1.1em; }
+            .instruction-content { font-size: 0.8em; }
+            .gif-container { margin-bottom: 8px; max-width: 280px; height: auto; max-height: 220px; } /* Encore plus petit pour les très petits écrans */
+            .gif-placeholder { max-width: 100%; height: 100%; }
+
+            /* Media query pour les codes promo */
+            .promo-code-text {
+                font-size: 1em;
+            }
+            .copy-code-btn {
+                font-size: 0.85em;
+                padding: 6px 10px;
+                max-width: 100px;
+            }
+            .promo-code-container {
+                margin-top: 10px;
+                margin-bottom: 12px;
+                padding: 8px;
+            }
+            .promo-code-buttons {
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loading-overlay">
+        <img id="loading-logo" src="your_logo.png" alt="Logo en chargement">
+        <p id="loading-text">BY WINNER PRONOS</p>
+    </div>
+
+    <div id="main-content">
+        <div id="menu-page" class="page-container">
+            <div id="language-selector">
+                </div>
+            <h2 data-lang-key="menuTitle">Bienvenue sur KING OF APPLE HACK !</h2>
+            <p data-lang-key="menuSubtitle">Choisissez une option ci-dessous.</p>
+            <div id="menu-container">
+                <button id="playGameBtn" data-lang-key="playGameBtn">Commencer à gagner 🍎</button>
+                <button id="instructionsBtn" data-lang-key="instructionsBtn">📜 Instructions</button>
+                <button id="resultsBtn" data-lang-key="resultsBtn">📊 Résultats clients</button>
+                <button id="createAccountBtn" data-lang-key="createAccountBtn">⚙️ Créer un compte</button>
+            </div>
+            <p id="menu-footer-text" data-lang-key="menuFooter">by @winner pronos</p>
+        </div>
+
+        <div id="game-page" class="page-container" style="display: none;">
+            <div class="game-wrapper">
+                <div class="game-area">
+                    <div class="game-row" id="row-9">
+                        <div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div>
+                    </div>
+                    <div class="game-row" id="row-8">
+                        <div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div>
+                    </div>
+                    <div class="game-row" id="row-7">
+                        <div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div>
+                    </div>
+                    <div class="game-row" id="row-6">
+                        <div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div>
+                    </div>
+                    <div class="game-row" id="row-5">
+                        <div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div>
+                    </div>
+                    <div class="game-row" id="row-4">
+                        <div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div>
+                    </div>
+                    <div class="game-row" id="row-3">
+                        <div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div>
+                    </div>
+                    <div class="game-row" id="row-2">
+                        <div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div>
+                    </div>
+                    <div class="game-row" id="row-1">
+                        <div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div>
+                    </div>
+                    <div class="game-row" id="row-0">
+                        <div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div><div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="bottom-text-container">
+                <div id="scrolling-text-container">
+                    <span id="scrolling-text" data-lang-key="scrollingText">Assurez-vous d'avoir lu les instructions pour éviter de perdre vos fonds !</span>
+                </div>
+
+                <div id="register-link-container">
+                    <a href="#" id="register-link" data-lang-key="registerLink"><u>Cliquer ici pour vous inscrire</u></a>
+                </div>
+            </div>
+
+            <div class="game-buttons-container">
+                <button id="newGameBtn" data-lang-key="newGameBtn">New Game</button>
+                <button id="showAppleBtn" data-lang-key="showAppleBtn">Show Apple</button>
+                <button id="backToMenuBtn" data-lang-key="backToMenuBtn">⬅️ Retour au menu</button>
+            </div>
+        </div>
+
+        <div id="instructions-page" class="page-container" style="display: none;">
+            <h2 data-lang-key="instructionsTitle">📜 Instructions du bot</h2>
+
+            <div class="gif-container">
+                <div class="gif-placeholder">
+                    <img src="your_instruction_gif.gif" alt="GIF d'instruction" onerror="this.parentElement.textContent='Placez votre GIF ici (GIF)'; this.style.backgroundColor='rgba(255, 255, 255, 0.1)';">
+                </div>
+            </div>
+            
+            <div class="instruction-section">
+                <div class="instruction-title" data-target="about-bot" data-lang-key="instructionTitle1">PRINCIPE DE FONCTIONNEMENT🤖 <span class="arrow">▶️</span></div>
+                <div class="instruction-content" id="about-bot">
+                    <p data-lang-key="instructionContent1_1">🤖 King Of Apple Hack est un outil avancé conçu pour vous aider à maximiser vos chances de réussite dans le jeu "Apple of Fortune" sur diverses plateformes de paris en ligne.</p>
+                    <p data-lang-key="instructionContent1_2">⚜️ Notre algorithme utilise des données complexes et une analyse prédictive pour identifier les cases les plus probables où se trouve la pomme🍎, vous offrant ainsi un avantage stratégique.</p>
+                </div>
+            </div>
+
+            <div class="instruction-section">
+                <div class="instruction-title" data-target="how-to-win" data-lang-key="instructionTitle2">COMMENT UTILISER LE HACK? 💰 <span class="arrow">▶️</span></div>
+                <div class="instruction-content" id="how-to-win">
+                    <p data-lang-key="instructionContent2_1">Pour obtenir un profit maximal, suivez ces étapes :</p>
+                    <p data-lang-key="instructionContent2_2">🟢 1. <b>Commencez un nouveau jeu</b> dans l'application King Of Apple Hack en cliquant sur "NOUVEAU JEU". 💸</p>
+                    <p data-lang-key="instructionContent2_3">🟢 2. <b>show apple</b> Le hack va générer la position de la pomme pour la première ligne du jeu.</p>
+                    <p data-lang-key="instructionContent2_4">🟢 3. <b>Ouvrez le jeu "Apple of Fortune"</b> sur votre bookmaker préféré
+                        <span class="bookmaker-link" data-bookmaker-name="1xbet"><u>1XBET</u></span>,
+                        <span class="bookmaker-link" data-bookmaker-name="melbet"><u>MELBET</u></span>,
+                        <span class="bookmaker-link" data-bookmaker-name="betwinner"><u>BETWINNER</u></span> ET
+                        <span class="bookmaker-link" data-bookmaker-name="megapari"><u>MEGAPARI</u></span>
+                    </p>
+                    <p data-lang-key="instructionContent2_5">(Si le lien ne s'ouvre pas, accédez-y avec un <b>VPN activé (Suède)</b>. Le PlayStore/App Store propose de nombreux services gratuits, par exemple :<b> Vpnify, Planet VPN, Hotspot VPN, etc. !)</b></p>
+                    <p data-lang-key="instructionContent2_6">🚨 <b>ATTENTION :</b> une inscription <b>sans le code promo FASE9</b> pourra perturber la connexion du bot à votre compte et vous faire perdre vos fonds.</p>
+                  
+                    <p data-lang-key="instructionContent2_7">🟢 4.<b> Lancez une partie</b> sur votre bookmaker.🍎.</p>
+                    <p data-lang-key="instructionContent2_8">🟢 5.<b>Reportez la position</b> indiquées par notre hack dans le jeu réel sur votre bookmaker.</p>
+                    <p data-lang-key="instructionContent2_9">🟢 6.<b>Procédez ligne par ligne</b> : après avoir ouvert une ligne sur le bookmaker, revenez à l'application King Of Apple Hack, cliquez sur "SHOW APPLE" pour obtenir les prédictions de la ligne suivante </p>
+                    <p data-lang-key="instructionContent2_10">🟢 7.<b> Encaissez vos gains</b> une fois que vous avez atteint votre objectif.</p>
+                    <p data-lang-key="instructionContent2_11">🟢 8. En cas de résultat infructueux, nous vous recommandons de <b>doubler (x²) votre mise</b> pour couvrir entièrement la perte avec le résultat suivant. 📈</p>
+                </div>
+            </div>
+
+            <div class="instruction-section">
+                <div class="instruction-title" data-target="budget-management" data-lang-key="instructionTitle3">CONFIGURATION OPTIMALE (IMPORTANT) 📊 <span class="arrow">▶️</span></div>
+                <div class="instruction-content" id="budget-management">
+                    <p data-lang-key="instructionContent3_1">Pour une efficacité maximale et pour éviter toute détection, nous vous recommandons fortement de jouer avec une configuration de mise spécifique sur votre bookmaker :</p>
+                    <ul>
+                        <li data-lang-key="instructionContent3_2"><b>Utilisé un compte officiel KM23 OU FASE9 :</b> Allez dans la session 'Creer un compte' du hack et créez votre noouveau compte OFFICIEL avec le code promo KM23 OU FASE9 pour connecter le hack avec votre compte du bookmaker et mettre toutes les chances de votre  coté </li>
+                        <li data-lang-key="instructionContent3_3"><b>Augmentation progressive :</b> Augmentez votre mise progressivement sur les lignes suivantes</li>
+                        <li data-lang-key="instructionContent3_4"><b>Limitez le nombre de parties :</b>Ne jouez pas plus de 5-7 parties par en 30 min avec le hack. Espacez vos sessions.</li>
+                    </ul>
+                    <p data-lang-key="instructionContent3_5">Ces pratiques réduisent le risque de détection et assurent une longévité de l'efficacité du hack.</p>
+                </div>
+            </div>
+
+            <div class="instruction-section">
+                <div class="instruction-title" data-target="help" data-lang-key="instructionTitle4">ASSISTANCE ET MISES À JOUR ❓ <span class="arrow">▶️</span></div>
+                <div class="instruction-content" id="help">
+                    <p data-lang-key="instructionContent4_1">Pour toute question, assistance technique ou pour les dernières mises à jour du hack, veuillez nous contacter via nos canaux officiels :💬.</p>
+                <ul>
+                   <li data-lang-key="instructionContent4_2"><b>Télégramme :</b>@king_of_apple_hack_support</li> 
+                   <li data-lang-key="instructionContent4_3"><b>Email :</b>support@kingofapplehack.com</li>
+                </ul>
+                <p data-lang-key="instructionContent4_4">Nous sommes constamment en train d'améliorer l'algorithme pour garantir les meilleurs résultats.</p>
+                </div>
+            </div>
+            <button class="menu-return-btn" data-lang-key="backToMenuBtn">⬅️ Retour au menu</button>
+        </div>
+
+        <div id="create-account-page" class="page-container" style="display: none;">
+            <h2 data-lang-key="createAccountTitle">CRÉER VOTRE COMPTE OFFICIEL</h2>
+
+            <div id="promo-instructions-section">
+                <h3 id="promo-instructions-title" data-lang-key="promoInstructionsTitle">POURQUOI UTILISER LE CODE PROMO FASE9 OU KM23 ?</h3>
+                <div id="promo-instructions-content">
+                    <ul>
+                        <li data-lang-key="promoReason1">Pour avoir un compte officiel de paris.</li>
+                        <li data-lang-key="promoReason2">Pour connecter le compte au bot.</li>
+                        <li data-lang-key="promoReason3">Pour avoir de bons résultats sur vos jeux.</li>
+                        <li data-lang-key="promoReason4">Pour maximiser vos gains.</li>
+                        <li data-lang-key="promoReason5">Pour mettre la chance de votre côté.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="gif-container">
+                <div class="gif-placeholder">
+                    <img src="your_account_gif.gif" alt="GIF de création de compte" onerror="this.parentElement.textContent='Placez votre GIF ici (GIFF)'; this.style.backgroundColor='rgba(0, 0, 0, 0.5)';">
+                </div>
+            </div>
+
+            <p data-lang-key="createAccountSubtitle">Utilisez les liens ci-dessous pour créer votre compte sur le bookmaker de votre choix et profitez des bonus de bienvenue avec notre code promo !</p>
+            <p data-lang-key="createAccountWarning">🚨 <b>ATTENTION :</b> une inscription <b>sans le code promo 'FASE9' ou 'KM23'</b> pourra perturber la connexion du bot à votre compte et reduire vos chances</p>
+            <div class="promo-code-container">
+                <p class="promo-code-text"> Your promo code: FASE9 or KM23</p>
+                <div class="promo-code-buttons">
+                    <button class="copy-code-btn" data-code="FASE9" data-lang-key="copyFase9">Copier FASE9</button>
+                    <button class="copy-code-btn" data-code="KM23" data-lang-key="copyKm23">Copier KM23</button>
+                </div>
+            </div>
+
+            <div class="bookmaker-buttons-container">
+                <div class="bookmaker-group">
+                    <button class="bookmaker-main-button btn-1xbet" data-bookmaker="1xbet">1XBET</button>
+                    <div class="bookmaker-sub-buttons" id="1xbet-sub-buttons">
+                        <button class="link-btn" data-type="official" data-lang-key="quickRegistration">🔗 Inscription Rapide</button>
+                        <button class="link-btn" data-type="app" data-lang-key="officialApp">📱 APP OFFICIEL</button>
+                        <button class="link-btn" data-type="iphone" data-lang-key="fullRegistration">🍎 Inscription Complète</button>
+                    </div>
+                </div>
+
+                <div class="bookmaker-group">
+                    <button class="bookmaker-main-button btn-melbet" data-bookmaker="melbet">MELBET</button>
+                    <div class="bookmaker-sub-buttons" id="melbet-sub-buttons">
+                        <button class="link-btn" data-type="official" data-lang-key="quickRegistration">🔗 Inscription Rapide</button>
+                        <button class="link-btn" data-type="app" data-lang-key="officialApp">📱 APP OFFICIEL</button>
+                        <button class="link-btn" data-type="iphone" data-lang-key="fullRegistration">🍎 Inscription Complète</button>
+                    </div>
+                </div>
+
+                <div class="bookmaker-group">
+                    <button class="bookmaker-main-button btn-betwinner" data-bookmaker="betwinner">BETWINNER</button>
+                    <div class="bookmaker-sub-buttons" id="betwinner-sub-buttons">
+                        <button class="link-btn" data-type="official" data-lang-key="quickRegistration">🔗 Inscription Rapide</button>
+                        <button class="link-btn" data-type="app" data-lang-key="officialApp">📱 APP OFFICIEL</button>
+                        <button class="link-btn" data-type="iphone" data-lang-key="fullRegistration">🍎 Inscription Complète</button>
+                    </div>
+                </div>
+
+                <div class="bookmaker-group">
+                    <button class="bookmaker-main-button btn-megapari" data-bookmaker="megapari">MEGAPARI</button>
+                    <div class="bookmaker-sub-buttons" id="megapari-sub-buttons">
+                        <button class="link-btn" data-type="official" data-lang-key="officialLink">🔗 LIEN OFFICIEL</button>
+                        <button class="link-btn" data-type="app" data-lang-key="officialApp">📱 APP OFFICIEL</button>
+                        <button class="link-btn" data-type="iphone" data-lang-key="fullRegistration">🍎 Inscription Complète</button>
+                    </div>
+                </div>
+                <p data-lang-key="vpnWarning">(Si le lien ne s'ouvre pas, accédez-y avec un <b>VPN activé (Suède)</b>. Le PlayStore/App Store propose de nombreux services gratuits, par exemple :<b> Vpnify, Planet VPN, Hotspot VPN, etc. !)</b></p>
+            </div>
+
+            <button class="menu-return-btn" data-lang-key="backToMenuBtn">⬅️ Retour au menu</button>
+        </div>
+
+        <div id="results-page" class="page-container" style="display: none;">
+            <h2 data-lang-key="resultsTitle">📊 RÉSULTATS DE NOS CLIENTS</h2>
+            <p data-lang-key="resultsSubtitle">Découvrez les succès de nos utilisateurs. Chaque image est un témoignage de l'efficacité de notre hack.</p>
+            <div id="photo-album-container">
+                <button id="prev-photo-btn-results" class="album-nav-btn">⬅️</button>
+                <div id="photo-album-results">
+                    <img id="current-image-results" src="1.jpg" alt="Preuve de résultat">
+                </div>
+                <button id="next-photo-btn-results" class="album-nav-btn">➡️</button>
+            </div>
+            <button class="menu-return-btn" data-lang-key="backToMenuBtn">⬅️ Retour au menu</button>
+        </div>
+
+    </div>
+
+    <audio id="appleSound" src="pomme_son.mp3" preload="auto"></audio>
+
+    <script>
+        // Récupération des éléments HTML
+        const loadingOverlay = document.getElementById('loading-overlay');
+        const mainContent = document.getElementById('main-content');
+        const appleSound = document.getElementById('appleSound');
+
+        // Pages
+        const menuPage = document.getElementById('menu-page');
+        const gamePage = document.getElementById('game-page');
+        const instructionsPage = document.getElementById('instructions-page');
+        const createAccountPage = document.getElementById('create-account-page');
+        const resultsPage = document.getElementById('results-page'); // Nouvelle page Résultats
+
+        // Boutons du menu
+        const playGameBtn = document.getElementById('playGameBtn');
+        const instructionsBtn = document.getElementById('instructionsBtn');
+        const resultsBtn = document.getElementById('resultsBtn'); // Nouveau bouton Résultats
+        const createAccountBtn = document.getElementById('createAccountBtn');
+
+        // Boutons du jeu
+        const allRows = document.querySelectorAll('.game-row');
+        const newGameBtn = document.getElementById('newGameBtn');
+        const showAppleBtn = document.getElementById('showAppleBtn');
+        const backToMenuBtnGame = document.getElementById('backToMenuBtn');
+
+        // Lien d'inscription clignotant
+        const registerLink = document.getElementById('register-link');
+
+        // Boutons de retour au menu pour les pages secondaires
+        const menuReturnBtns = document.querySelectorAll('.menu-return-btn');
+
+        const woodenCircleImage = 'photo_2025-06-28_14-52-11.jpg';
+        const appleImage = 'photo_2025-06-28_14-52-07.jpg';
+        const transparentCircleImage = 'photo_2025-06-28_14-52-17.jpg';
+
+        let currentRowIndex = 0;
+
+        // Language objects
+        const translations = {
+            "en": {
+                "menuTitle": "Welcome to KING OF APPLE HACK!",
+                "menuSubtitle": "Choose an option below.",
+                "playGameBtn": "Start Winning 🍎",
+                "instructionsBtn": "📜 Instructions",
+                "resultsBtn": "📊 Client Results",
+                "createAccountBtn": "⚙️ Create an Account",
+                "menuFooter": "by @winner pronos",
+                "scrollingText": "Make sure you have read the instructions to avoid losing your funds!",
+                "registerLink": "<u>Click here to register</u>",
+                "newGameBtn": "New Game",
+                "showAppleBtn": "Show Apple",
+                "backToMenuBtn": "⬅️ Back to Menu",
+                "instructionsTitle": "📜 Bot Instructions",
+                "instructionTitle1": "HOW IT WORKS🤖",
+                "instructionContent1_1": "🤖 King Of Apple Hack is an advanced tool designed to help you maximize your chances of success in the 'Apple of Fortune' game on various online betting platforms.",
+                "instructionContent1_2": "⚜️ Our algorithm uses complex data and predictive analysis to identify the most probable squares where the apple🍎 is located, giving you a strategic advantage.",
+                "instructionTitle2": "HOW TO USE THE HACK? 💰",
+                "instructionContent2_1": "To get maximum profit, follow these steps:",
+                "instructionContent2_2": "🟢 1. <b>Start a new game</b> in the King Of Apple Hack application by clicking on 'NEW GAME'. 💸",
+                "instructionContent2_3": "🟢 2. <b>Show Apple</b> The hack will generate the apple's position for the first line of the game.",
+                "instructionContent2_4": "🟢 3. <b>Open the 'Apple of Fortune' game</b> on your favorite bookmaker:",
+                "instructionContent2_5": "(If the link does not open, access it with an <b>active VPN (Sweden)</b>. The PlayStore/App Store offers many free services, for example:<b> Vpnify, Planet VPN, Hotspot VPN, etc.!)</b>",
+                "instructionContent2_6": "🚨 <b>WARNING:</b> registration <b>without the promo code FASE9</b> may disrupt the bot's connection to your account and cause you to lose your funds.",
+                "instructionContent2_7": "🟢 4.<b> Start a game</b> on your bookmaker.🍎.",
+                "instructionContent2_8": "🟢 5.<b>Report the position</b> indicated by our hack in the real game on your bookmaker.",
+                "instructionContent2_9": "🟢 6.<b>Proceed line by line</b>: after opening a line on the bookmaker, return to the King Of Apple Hack application, click on 'SHOW APPLE' to get predictions for the next line.",
+                "instructionContent2_10": "🟢 7.<b> Cash out your winnings</b> once you have reached your goal.",
+                "instructionContent2_11": "🟢 8. In case of an unsuccessful result, we recommend <b>doubling (x²) your stake</b> to fully cover the loss with the next result. 📈",
+                "instructionTitle3": "OPTIMAL CONFIGURATION (IMPORTANT) 📊",
+                "instructionContent3_1": "For maximum efficiency and to avoid detection, we strongly recommend playing with a specific betting configuration on your bookmaker:",
+                "instructionContent3_2": "<b>Use an official KM23 OR FASE9 account:</b> Go to the 'Create an account' session of the hack and create your new OFFICIAL account with the promo code KM23 OR FASE9 to connect the hack with your bookmaker account and put all the odds on your side.",
+                "instructionContent3_3": "<b>Progressive increase:</b> Gradually increase your stake on subsequent lines.",
+                "instructionContent3_4": "<b>Limit the number of games:</b> Do not play more than 5-7 games per 30 minutes with the hack. Space out your sessions.",
+                "instructionContent3_5": "These practices reduce the risk of detection and ensure the longevity of the hack's effectiveness.",
+                "instructionTitle4": "ASSISTANCE AND UPDATES ❓",
+                "instructionContent4_1": "For any questions, technical assistance or for the latest updates of the hack, please contact us via our official channels:💬.",
+                "instructionContent4_2": "<b>Telegram:</b>@king_of_apple_hack_support",
+                "instructionContent4_3": "<b>Email:</b>support@kingofapplehack.com",
+                "instructionContent4_4": "We are constantly improving the algorithm to guarantee the best results.",
+                "createAccountTitle": "CREATE YOUR OFFICIAL ACCOUNT",
+                "promoInstructionsTitle": "WHY USE PROMO CODE FASE9 OR KM23?",
+                "promoReason1": "To have an official betting account.",
+                "promoReason2": "To connect the account to the bot.",
+                "promoReason3": "To get good results on your games.",
+                "promoReason4": "To maximize your winnings.",
+                "promoReason5": "To put luck on your side.",
+                "createAccountSubtitle": "Use the links below to create your account on the bookmaker of your choice and enjoy welcome bonuses with our promo code!",
+                "createAccountWarning": "🚨 <b>WARNING:</b> registration <b>without the promo code 'FASE9' or 'KM23'</b> may disrupt the bot's connection to your account and reduce your chances.",
+                "yourPromoCode": "Your promo code: <span style=\"color: white;\">FASE9</span> or <span style=\"color: white;\">KM23</span>",
+                "copyFase9": "Copy FASE9",
+                "copyKm23": "Copy KM23",
+                "quickRegistration": "🔗 Quick Registration",
+                "officialApp": "📱 Official App",
+                "fullRegistration": "🍎 Full Registration",
+                "officialLink": "🔗 Official Link",
+                "vpnWarning": "(If the link does not open, access it with an <b>active VPN (Sweden)</b>. The PlayStore/App Store offers many free services, for example:<b> Vpnify, Planet VPN, Hotspot VPN, etc.!)</b>",
+                "resultsTitle": "📊 CLIENT RESULTS",
+                "resultsSubtitle": "Discover the successes of our users. Each image is a testament to the effectiveness of our hack."
+            },
+            "fr": {
+                "menuTitle": "Bienvenue sur KING OF APPLE HACK !",
+                "menuSubtitle": "Choisissez une option ci-dessous.",
+                "playGameBtn": "Commencer à gagner 🍎",
+                "instructionsBtn": "📜 Instructions",
+                "resultsBtn": "📊 Résultats clients",
+                "createAccountBtn": "⚙️ Créer un compte",
+                "menuFooter": "by @winner pronos",
+                "scrollingText": "Assurez-vous d'avoir lu les instructions pour éviter de perdre vos fonds !",
+                "registerLink": "<u>Cliquer ici pour vous inscrire</u>",
+                "newGameBtn": "New Game",
+                "showAppleBtn": "Show Apple",
+                "backToMenuBtn": "⬅️ Retour au menu",
+                "instructionsTitle": "📜 Instructions du bot",
+                "instructionTitle1": "PRINCIPE DE FONCTIONNEMENT🤖",
+                "instructionContent1_1": "🤖 King Of Apple Hack est un outil avancé conçu pour vous aider à maximiser vos chances de réussite dans le jeu 'Apple of Fortune' sur diverses plateformes de paris en ligne.",
+                "instructionContent1_2": "⚜️ Notre algorithme utilise des données complexes et une analyse prédictive pour identifier les cases les plus probables où se trouve la pomme🍎, vous offrant ainsi un avantage stratégique.",
+                "instructionTitle2": "COMMENT UTILISER LE HACK? 💰",
+                "instructionContent2_1": "Pour obtenir un profit maximal, suivez ces étapes :",
+                "instructionContent2_2": "🟢 1. <b>Commencez un nouveau jeu</b> dans l'application King Of Apple Hack en cliquant sur 'NOUVEAU JEU'. 💸",
+                "instructionContent2_3": "🟢 2. <b>show apple</b> Le hack va générer la position de la pomme pour la première ligne du jeu.",
+                "instructionContent2_4": "🟢 3. <b>Ouvrez le jeu 'Apple of Fortune'</b> sur votre bookmaker préféré",
+                "instructionContent2_5": "(Si le lien ne s'ouvre pas, accédez-y avec un <b>VPN activé (Suède)</b>. Le PlayStore/App Store propose de nombreux services gratuits, par exemple :<b> Vpnify, Planet VPN, Hotspot VPN, etc. !)</b>",
+                "instructionContent2_6": "🚨 <b>ATTENTION :</b> une inscription <b>sans le code promo FASE9</b> pourra perturber la connexion du bot à votre compte et vous faire perdre vos fonds.",
+                "instructionContent2_7": "🟢 4.<b> Lancez une partie</b> sur votre bookmaker.🍎.",
+                "instructionContent2_8": "🟢 5.<b>Reportez la position</b> indiquées par notre hack dans le jeu réel sur votre bookmaker.",
+                "instructionContent2_9": "🟢 6.<b>Procédez ligne par ligne</b> : après avoir ouvert une ligne sur le bookmaker, revenez à l'application King Of Apple Hack, cliquez sur 'SHOW APPLE' pour obtenir les prédictions de la ligne suivante ",
+                "instructionContent2_10": "🟢 7.<b> Encaissez vos gains</b> une fois que vous avez atteint votre objectif.",
+                "instructionContent2_11": "🟢 8. En cas de résultat infructueux, nous vous recommandons de <b>doubler (x²) votre mise</b> pour couvrir entièrement la perte avec le résultat suivant. 📈",
+                "instructionTitle3": "CONFIGURATION OPTIMALE (IMPORTANT) 📊",
+                "instructionContent3_1": "Pour une efficacité maximale et pour éviter toute détection, nous vous recommandons fortement de jouer avec une configuration de mise spécifique sur votre bookmaker :",
+                "instructionContent3_2": "<b>Utilisé un compte officiel KM23 OU FASE9 :</b> Allez dans la session 'Creer un compte' du hack et créez votre noouveau compte OFFICIEL avec le code promo KM23 OU FASE9 pour connecter le hack avec votre compte du bookmaker et mettre toutes les chances de votre  coté ",
+                "instructionContent3_3": "<b>Augmentation progressive :</b> Augmentez votre mise progressivement sur les lignes suivantes",
+                "instructionContent3_4": "<b>Limitez le nombre de parties :</b>Ne jouez pas plus de 5-7 parties par en 30 min avec le hack. Espacez vos sessions.",
+                "instructionContent3_5": "Ces pratiques réduisent le risque de détection et assurent une longévité de l'efficacité du hack.",
+                "instructionTitle4": "ASSISTANCE ET MISES À JOUR ❓",
+                "instructionContent4_1": "Pour toute question, assistance technique ou pour les dernières mises à jour du hack, veuillez nous contacter via nos canaux officiels :💬.",
+                "instructionContent4_2": "<b>Télégramme :</b>@king_of_apple_hack_support",
+                "instructionContent4_3": "<b>Email :</b>support@kingofapplehack.com",
+                "instructionContent4_4": "Nous sommes constamment en train d'améliorer l'algorithme pour garantir les meilleurs résultats.",
+                "createAccountTitle": "CRÉER VOTRE COMPTE OFFICIEL",
+                "promoInstructionsTitle": "POURQUOI UTILISER LE CODE PROMO FASE9 OU KM23 ?",
+                "promoReason1": "Pour avoir un compte officiel de paris.",
+                "promoReason2": "Pour connecter le compte au bot.",
+                "promoReason3": "Pour avoir de bons résultats sur vos jeux.",
+                "promoReason4": "Pour maximiser vos gains.",
+                "promoReason5": "Pour mettre la chance de votre côté.",
+                "createAccountSubtitle": "Utilisez les liens ci-dessous pour créer votre compte sur le bookmaker de votre choix et profitez des bonus de bienvenue avec notre code promo !",
+                "createAccountWarning": "🚨 <b>ATTENTION :</b> une inscription <b>sans le code promo 'FASE9' ou 'KM23'</b> pourra perturber la connexion du bot à votre compte et reduire vos chances",
+                "yourPromoCode": "Votre code promo : <span style=\"color: white;\">FASE9</span> ou <span style=\"color: white;\">KM23</span>",
+                "copyFase9": "Copier FASE9",
+                "copyKm23": "Copier KM23",
+                "quickRegistration": "🔗 Inscription Rapide",
+                "officialApp": "📱 APP OFFICIEL",
+                "fullRegistration": "🍎 Inscription Complète",
+                "officialLink": "🔗 LIEN OFFICIEL",
+                "vpnWarning": "(Si le lien ne s'ouvre pas, accédez-y avec un <b>VPN activé (Suède)</b>. Le PlayStore/App Store propose de nombreux services gratuits, par exemple :<b> Vpnify, Planet VPN, Hotspot VPN, etc. !)</b>",
+                "resultsTitle": "📊 RÉSULTATS DE NOS CLIENTS",
+                "resultsSubtitle": "Découvrez les succès de nos utilisateurs. Chaque image est un témoignage de l'efficacité de notre hack."
+            },
+            "ar": { // Arabic (UAE)
+                "menuTitle": "مرحبًا بك في KING OF APPLE HACK!",
+                "menuSubtitle": "اختر خيارًا أدناه.",
+                "playGameBtn": "ابدأ الفوز 🍎",
+                "instructionsBtn": "📜 التعليمات",
+                "resultsBtn": "📊 نتائج العملاء",
+                "createAccountBtn": "⚙️ إنشاء حساب",
+                "menuFooter": "بواسطة @winner pronos",
+                "scrollingText": "تأكد من قراءة التعليمات لتجنب فقدان أموالك!",
+                "registerLink": "<u>انقر هنا للتسجيل</u>",
+                "newGameBtn": "لعبة جديدة",
+                "showAppleBtn": "إظهار التفاحة",
+                "backToMenuBtn": "⬅️ العودة إلى القائمة",
+                "instructionsTitle": "📜 تعليمات البوت",
+                "instructionTitle1": "كيف يعمل🤖",
+                "instructionContent1_1": "🤖 King Of Apple Hack هي أداة متقدمة مصممة لمساعدتك على زيادة فرص نجاحك في لعبة 'Apple of Fortune' على مختلف منصات الرهان عبر الإنترنت.",
+                "instructionContent1_2": "⚜️ تستخدم خوارزميتنا بيانات معقدة وتحليلاً تنبؤيًا لتحديد المربعات الأكثر احتمالاً حيث توجد التفاحة🍎، مما يمنحك ميزة استراتيجية.",
+                "instructionTitle2": "كيف تستخدم الهاك؟ 💰",
+                "instructionContent2_1": "لتحقيق أقصى ربح، اتبع هذه الخطوات:",
+                "instructionContent2_2": "🟢 1. <b>ابدأ لعبة جديدة</b> في تطبيق King Of Apple Hack بالنقر على 'لعبة جديدة'. 💸",
+                "instructionContent2_3": "🟢 2. <b>إظهار التفاحة</b> سيولد الهاك موقع التفاحة للخط الأول من اللعبة.",
+                "instructionContent2_4": "🟢 3. <b>افتح لعبة 'Apple of Fortune'</b> على كتاب الرهانات المفضل لديك:",
+                "instructionContent2_5": "(إذا لم يفتح الرابط، قم بالوصول إليه باستخدام <b>VPN نشط (السويد)</b>. يوفر متجر PlayStore/App Store العديد من الخدمات المجانية، على سبيل المثال:<b> Vpnify، Planet VPN، Hotspot VPN، إلخ.!)</b>",
+                "instructionContent2_6": "🚨 <b>تحذير:</b> التسجيل <b>بدون الرمز الترويجي FASE9</b> قد يعطل اتصال البوت بحسابك ويسبب لك خسارة أموالك.",
+                "instructionContent2_7": "🟢 4.<b> ابدأ لعبة</b> على كتاب الرهانات الخاص بك.🍎.",
+                "instructionContent2_8": "🟢 5.<b>أبلغ عن الموقع</b> الذي يشير إليه الهاك في اللعبة الحقيقية على كتاب الرهانات الخاص بك.",
+                "instructionContent2_9": "🟢 6.<b>تابع خطاً بخط</b>: بعد فتح خط على كتاب الرهانات، ارجع إلى تطبيق King Of Apple Hack، وانقر على 'إظهار التفاحة' للحصول على تنبؤات للخط التالي.",
+                "instructionContent2_10": "🟢 7.<b> اسحب أرباحك</b> بمجرد تحقيق هدفك.",
+                "instructionContent2_11": "🟢 8. في حالة النتيجة غير الناجحة، نوصي <b>بمضاعفة (x²) رهانك</b> لتغطية الخسارة بالكامل بالنتيجة التالية. 📈",
+                "instructionTitle3": "التكوين الأمثل (هام) 📊",
+                "instructionContent3_1": "لأقصى قدر من الكفاءة ولتجنب الكشف، نوصي بشدة باللعب بتكوين رهان محدد على كتاب الرهانات الخاص بك:",
+                "instructionContent3_3": "<b>زيادة تدريجية:</b> قم بزيادة رهانك تدريجياً على الخطوط اللاحقة.",
+                "instructionContent3_4": "<b>الحد من عدد الألعاب:</b> لا تلعب أكثر من 5-7 ألعاب كل 30 دقيقة باستخدام الهاك. قم بتباعد جلساتك.",
+                "instructionContent3_5": "تقلل هذه الممارسات من خطر الكشف وتضمن طول عمر فعالية الهاك.",
+                "instructionContent3_2": "<b>استخدم حسابًا رسميًا KM23 أو FASE9:</b> اذهب إلى جلسة 'إنشاء حساب' في الهاك وأنشئ حسابك الرسمي الجديد باستخدام الرمز الترويجي KM23 أو FASE9 لربط الهاك بحسابك في كتاب الرهانات ووضع جميع الاحتمالات في صالحك.",
+                "instructionTitle4": "المساعدة والتحديثات ❓",
+                "instructionContent4_1": "لأي أسئلة أو مساعدة فنية أو للحصول على أحدث تحديثات الهاك، يرجى الاتصال بنا عبر قنواتنا الرسمية:💬.",
+                "instructionContent4_2": "<b>تلجرام:</b>@king_of_apple_hack_support",
+                "instructionContent4_3": "<b>البريد الإلكتروني:</b>support@kingofapplehack.com",
+                "instructionContent4_4": "نحن نعمل باستمرار على تحسين الخوارزمية لضمان أفضل النتائج.",
+                "createAccountTitle": "أنشئ حسابك الرسمي",
+                "promoInstructionsTitle": "لماذا تستخدم الرمز الترويجي FASE9 أو KM23؟",
+                "promoReason1": "للحصول على حساب مراهنات رسمي.",
+                "promoReason2": "لربط الحساب بالبوت.",
+                "promoReason3": "للحصول على نتائج جيدة في ألعابك.",
+                "promoReason4": "لتحقيق أقصى قدر من الأرباح.",
+                "promoReason5": "لوضع الحظ في صالحك.",
+                "createAccountSubtitle": "استخدم الروابط أدناه لإنشاء حسابك على كتاب الرهانات الذي تختاره واستمتع بمكافآت الترحيب مع الرمز الترويجي الخاص بنا!",
+                "createAccountWarning": "🚨 <b>تحذير:</b> التسجيل <b>بدون الرمز الترويجي 'FASE9' أو 'KM23'</b> قد يعطل اتصال البوت بحسابك ويقلل من فرصك.",
+                "yourPromoCode": "الرمز الترويجي الخاص بك: <span style=\"color: white;\">FASE9</span> أو <span style=\"color: white;\">KM23</span>",
+                "copyFase9": "نسخ FASE9",
+                "copyKm23": "نسخ KM23",
+                "quickRegistration": "🔗 تسجيل سريع",
+                "officialApp": "📱 التطبيق الرسمي",
+                "fullRegistration": "🍎 تسجيل كامل",
+                "officialLink": "🔗 رابط رسمي",
+                "vpnWarning": "(إذا لم يفتح الرابط، قم بالوصول إليه باستخدام <b>VPN نشط (السويد)</b>. يوفر متجر PlayStore/App Store العديد من الخدمات المجانية، على سبيل المثال:<b> Vpnify، Planet VPN، Hotspot VPN، إلخ.!)</b>",
+                "resultsTitle": "📊 نتائج العملاء",
+                "resultsSubtitle": "اكتشف نجاحات مستخدمينا. كل صورة هي شهادة على فعالية الهاك لدينا."
+            },
+            "az": { // Azerbaijani
+                "menuTitle": "KING OF APPLE HACK-a xoş gəlmisiniz!",
+                "menuSubtitle": "Aşağıdakı seçimlərdən birini seçin.",
+                "playGameBtn": "Qazanmağa başlayın 🍎",
+                "instructionsBtn": "📜 Təlimatlar",
+                "resultsBtn": "📊 Müştəri Nəticələri",
+                "createAccountBtn": "⚙️ Hesab Yaradın",
+                "menuFooter": "@winner pronos tərəfindən",
+                "scrollingText": "Vəsaitlərinizi itirməmək üçün təlimatları oxuduğunuzdan əmin olun!",
+                "registerLink": "<u>Qeydiyyatdan keçmək üçün bura klikləyin</u>",
+                "newGameBtn": "Yeni Oyun",
+                "showAppleBtn": "Alma Göstər",
+                "backToMenuBtn": "⬅️ Menyuya qayıt",
+                "instructionsTitle": "📜 Bot Təlimatları",
+                "instructionTitle1": "NECƏ İŞLƏYİR🤖",
+                "instructionContent1_1": "🤖 King Of Apple Hack, müxtəlif onlayn mərc platformalarında 'Apple of Fortune' oyununda uğur şanslarınızı maksimuma çatdırmağınıza kömək etmək üçün nəzərdə tutulmuş qabaqcıl bir vasitədir.",
+                "instructionContent1_2": "⚜️ Alqoritmimiz alma🍎-nın yerləşdiyi ən ehtimal olunan kvadratları müəyyən etmək üçün mürəkkəb məlumatlardan və proqnozlaşdırıcı analizdən istifadə edir, bu da sizə strateji üstünlük verir.",
+                "instructionTitle2": "HACK-DAN NECƏ İSTİFADƏ ETMƏK LAZIMDIR? 💰",
+                "instructionContent2_1": "Maksimum qazanc əldə etmək üçün bu addımları izləyin:",
+                "instructionContent2_2": "🟢 1. King Of Apple Hack tətbiqində 'YENİ OYUN' düyməsinə klikləyərək <b>yeni oyun başlayın</b>. 💸",
+                "instructionContent2_3": "🟢 2. <b>Almanı göstər</b> Hack oyunun ilk sətri üçün almanın mövqeyini yaradacaq.",
+                "instructionContent2_4": "🟢 3. Sevdiyiniz bukmeker kontorunda 'Apple of Fortune' oyununu <b>açın</b>:",
+                "instructionContent2_5": "(Əgər link açılmırsa, <b>aktiv VPN (İsveç)</b> ilə daxil olun. PlayStore/App Store bir çox pulsuz xidmət təklif edir, məsələn:<b> Vpnify, Planet VPN, Hotspot VPN, və s.!)</b>",
+                "instructionContent2_6": "🚨 <b>DİQQƏT:</b> <b>FASE9 promosyon kodu olmadan</b> qeydiyyat botun hesabınıza qoşulmasını poza bilər və vəsaitlərinizi itirməyinizə səbəb ola bilər.",
+                "instructionContent2_7": "🟢 4. Bukmeker kontorunuzda <b>oyun başlayın</b>.🍎.",
+                "instructionContent2_8": "🟢 5. Hack tərəfindən göstərilən mövqeyi real oyunda bukmeker kontorunuzda <b>bildirin</b>.",
+                "instructionContent2_9": "🟢 6. <b>Sətir-sətir davam edin</b>: bukmeker kontorunda bir sətir açdıqdan sonra King Of Apple Hack tətbiqinə qayıdın, növbəti sətir üçün proqnozları əldə etmək üçün 'ALMA GÖSTƏR' düyməsinə klikləyin.",
+                "instructionContent2_10": "🟢 7. Məqsədinizə çatdıqdan sonra <b>qazanclarınızı nağdlaşdırın</b>.",
+                "instructionContent2_11": "🟢 8. Uğursuz nəticə halında, növbəti nəticə ilə zərəri tamamilə ödəmək üçün <b>bahisinizi ikiqat (x²) artırmağı</b> tövsiyə edirik. 📈",
+                "instructionTitle3": "OPTIMAL KONFİQURASİYA (VACİBDİR) 📊",
+                "instructionContent3_1": "Maksimum effektivlik və aşkarlanmanın qarşısını almaq üçün bukmeker kontorunuzda xüsusi mərc konfiqurasiyası ilə oynamağınızı qətiyyətlə tövsiyə edirik:",
+                "instructionContent3_2": "<b>Rəsmi KM23 VƏ YA FASE9 hesabı istifadə edin:</b> Hack-ın 'Hesab yarat' bölməsinə keçin və hack-ı bukmeker hesabınıza qoşmaq və bütün şansları öz tərəfinizə çəkmək üçün KM23 VƏ YA FASE9 promosyon kodu ilə yeni RƏSMİ hesabınızı yaradın.",
+                "instructionContent3_3": "<b>Proqressiv artım:</b> Sonrakı sətirlərdə bahisinizi tədricən artırın.",
+                "instructionContent3_4": "<b>Oyun sayını məhdudlaşdırın:</b> Hack ilə 30 dəqiqədə 5-7 oyundan çox oynamayın. Seanslarınızı aralı edin.",
+                "instructionContent3_5": "Bu təcrübələr aşkarlanma riskini azaldır və hack-ın effektivliyinin uzunömürlülüyünü təmin edir.",
+                "instructionTitle4": "DƏSTƏK VƏ YENİLƏMƏLƏR ❓",
+                "instructionContent4_1": "Hər hansı bir sual, texniki dəstək və ya hack-ın son yeniləmələri üçün rəsmi kanallarımız vasitəsilə bizimlə əlaqə saxlayın:💬.",
+                "instructionContent4_2": "<b>Telegram:</b>@king_of_apple_hack_support",
+                "instructionContent4_3": "<b>E-poçt:</b>support@kingofapplehack.com",
+                "instructionContent4_4": "Ən yaxşı nəticələri təmin etmək üçün alqoritmi daim təkmilləşdiririk.",
+                "createAccountTitle": "RƏSMİ HESABINIZI YARADIN",
+                "promoInstructionsTitle": "NİYƏ FASE9 VƏ YA KM23 PROMOSYON KODUNU İSTİFADƏ ETMƏLİSİNİZ?",
+                "promoReason1": "Rəsmi mərc hesabınız olsun.",
+                "promoReason2": "Hesabı bota qoşmaq üçün.",
+                "promoReason3": "Oyunlarınızda yaxşı nəticələr əldə etmək üçün.",
+                "promoReason4": "Qazanclarınızı maksimuma çatdırmaq üçün.",
+                "promoReason5": "Şansı öz tərəfinizə çəkmək üçün.",
+                "createAccountSubtitle": "Seçdiyiniz bukmeker kontorunda hesabınızı yaratmaq və promosyon kodumuzla xoş gəldin bonuslarından yararlanmaq üçün aşağıdakı linklərdən istifadə edin!",
+                "createAccountWarning": "🚨 <b>DİQQƏT:</b> <b>'FASE9' və ya 'KM23' promosyon kodu olmadan</b> qeydiyyat botun hesabınıza qoşulmasını poza bilər və şanslarınızı azalda bilər.",
+                "yourPromoCode": "Promosyon kodunuz: <span style=\"color: white;\">FASE9</span> və ya <span style=\"color: white;\">KM23</span>",
+                "copyFase9": "FASE9 kopyala",
+                "copyKm23": "KM23 kopyala",
+                "quickRegistration": "🔗 Tez Qeydiyyat",
+                "officialApp": "📱 RƏSMİ TƏTBİQ",
+                "fullRegistration": "🍎 Tam Qeydiyyat",
+                "officialLink": "🔗 RƏSMİ LİNK",
+                "vpnWarning": "(Əgər link açılmırsa, <b>aktiv VPN (İsveç)</b> ilə daxil olun. PlayStore/App Store bir çox pulsuz xidmət təklif edir, məsələn:<b> Vpnify, Planet VPN, Hotspot VPN, və s.!)</b>",
+                "resultsTitle": "📊 MÜŞTƏRİ NƏTİCƏLƏRİ",
+                "resultsSubtitle": "İstifadəçilərimizin uğurlarını kəşf edin. Hər şəkil hackımızın effektivliyinin sübutudur."
+            },
+            "hi": { // Hindi
+                "menuTitle": "किंग ऑफ़ एप्पल हैक में आपका स्वागत है!",
+                "menuSubtitle": "नीचे एक विकल्प चुनें।",
+                "playGameBtn": "जीतना शुरू करें 🍎",
+                "instructionsBtn": "📜 निर्देश",
+                "resultsBtn": "📊 ग्राहक परिणाम",
+                "createAccountBtn": "⚙️ एक खाता बनाएँ",
+                "menuFooter": "द्वारा @winner pronos",
+                "scrollingText": "सुनिश्चित करें कि आपने अपने फंड को खोने से बचने के लिए निर्देश पढ़ लिए हैं!",
+                "registerLink": "<u>पंजीकरण करने के लिए यहां क्लिक करें</u>",
+                "newGameBtn": "नया गेम",
+                "showAppleBtn": "सेब दिखाएँ",
+                "backToMenuBtn": "⬅️ मेनू पर वापस",
+                "instructionsTitle": "📜 बॉट निर्देश",
+                "instructionTitle1": "यह कैसे काम करता है🤖",
+                "instructionContent1_1": "🤖 किंग ऑफ़ एप्पल हैक एक उन्नत उपकरण है जिसे विभिन्न ऑनलाइन सट्टेबाजी प्लेटफार्मों पर 'एप्पल ऑफ़ फॉर्च्यून' गेम में आपकी सफलता की संभावनाओं को अधिकतम करने में मदद करने के लिए डिज़ाइन किया गया है।",
+                "instructionContent1_2": "⚜️ हमारा एल्गोरिथम जटिल डेटा और भविष्य कहनेवाला विश्लेषण का उपयोग करके सबसे संभावित वर्गों की पहचान करता है जहां सेब🍎 स्थित है, जिससे आपको एक रणनीतिक लाभ मिलता है।",
+                "instructionTitle2": "हैक का उपयोग कैसे करें? 💰",
+                "instructionContent2_1": "अधिकतम लाभ प्राप्त करने के लिए, इन चरणों का पालन करें:",
+                "instructionContent2_2": "🟢 1. किंग ऑफ़ एप्पल हैक एप्लिकेशन में 'नया गेम' पर क्लिक करके <b>एक नया गेम शुरू करें</b>। 💸",
+                "instructionContent2_3": "🟢 2. <b>सेब दिखाएँ</b> हैक गेम की पहली पंक्ति के लिए सेब की स्थिति उत्पन्न करेगा।",
+                "instructionContent2_4": "🟢 3. अपने पसंदीदा सट्टेबाज पर 'एप्पल ऑफ़ फॉर्च्यून' गेम <b>खोलें</b>:",
+                "instructionContent2_5": "(यदि लिंक नहीं खुलता है, तो <b>सक्रिय वीपीएन (स्वीडन)</b> के साथ इसे एक्सेस करें। PlayStore/App Store कई मुफ्त सेवाएं प्रदान करता है, उदाहरण के लिए:<b> Vpnify, Planet VPN, Hotspot VPN, आदि!)</b>",
+                "instructionContent2_6": "🚨 <b>चेतावनी:</b> <b>प्रोमो कोड FASE9 के बिना</b> पंजीकरण बॉट के आपके खाते से कनेक्शन को बाधित कर सकता है और आपके फंड को खोने का कारण बन सकता है।",
+                "instructionContent2_7": "🟢 4. अपने सट्टेबाज पर <b>एक खेल शुरू करें</b>।🍎.",
+                "instructionContent2_8": "🟢 5. हमारे हैक द्वारा इंगित स्थिति को अपने सट्टेबाज पर वास्तविक गेम में <b>रिपोर्ट करें</b>।",
+                "instructionContent2_9": "🟢 6. <b>पंक्ति दर पंक्ति आगे बढ़ें</b>: सट्टेबाज पर एक पंक्ति खोलने के बाद, किंग ऑफ़ एप्पल हैक एप्लिकेशन पर वापस आएं, अगली पंक्ति के लिए भविष्यवाणियां प्राप्त करने के लिए 'सेब दिखाएँ' पर क्लिक करें।",
+                "instructionContent2_10": "🟢 7. एक बार जब आप अपना लक्ष्य प्राप्त कर लें, तो <b>अपनी जीत नकद करें</b>।",
+                "instructionContent2_11": "🟢 8. एक असफल परिणाम के मामले में, हम आपको अगली परिणाम के साथ नुकसान को पूरी तरह से कवर करने के लिए <b>अपनी हिस्सेदारी को दोगुना (x²) करने</b> की सलाह देते हैं। 📈",
+                "instructionTitle3": "इष्टतम कॉन्फ़िगरेशन (महत्वपूर्ण) 📊",
+                "instructionContent3_1": "अधिकतम दक्षता और पता लगाने से बचने के लिए, हम दृढ़ता से आपके सट्टेबाज पर एक विशिष्ट सट्टेबाजी कॉन्फ़िगरेशन के साथ खेलने की सलाह देते हैं:",
+                "instructionContent3_2": "<b>एक आधिकारिक KM23 या FASE9 खाते का उपयोग करें:</b> हैक के 'एक खाता बनाएँ' सत्र पर जाएं और KM23 या FASE9 प्रोमो कोड के साथ अपना नया आधिकारिक खाता बनाएं ताकि हैक को आपके सट्टेबाज खाते से जोड़ा जा सके और सभी बाधाओं को आपके पक्ष में रखा जा सके।",
+                "instructionContent3_3": "<b>प्रगतिशील वृद्धि:</b> बाद की पंक्तियों पर अपनी हिस्सेदारी धीरे-धीरे बढ़ाएं।",
+                "instructionContent3_4": "<b>गेम की संख्या सीमित करें:</b> हैक के साथ प्रति 30 मिनट में 5-7 से अधिक गेम न खेलें। अपने सत्रों को फैलाएं।",
+                "instructionContent3_5": "ये प्रथाएं पता लगाने के जोखिम को कम करती हैं और हैक की प्रभावशीलता की लंबी उम्र सुनिश्चित करती हैं।",
+                "instructionTitle4": "सहायता और अपडेट ❓",
+                "instructionContent4_1": "किसी भी प्रश्न, तकनीकी सहायता या हैक के नवीनतम अपडेट के लिए, कृपया हमारे आधिकारिक चैनलों के माध्यम से हमसे संपर्क करें:💬।",
+                "instructionContent4_2": "<b>टेलीग्राम:</b>@king_of_apple_hack_support",
+                "instructionContent4_3": "<b>ईमेल:</b>support@kingofapplehack.com",
+                "instructionContent4_4": "हम सर्वोत्तम परिणाम सुनिश्चित करने के लिए एल्गोरिथम में लगातार सुधार कर रहे हैं।",
+                "createAccountTitle": "अपना आधिकारिक खाता बनाएँ",
+                "promoInstructionsTitle": "प्रोमो कोड FASE9 या KM23 का उपयोग क्यों करें?",
+                "promoReason1": "एक आधिकारिक सट्टेबाजी खाता रखने के लिए।",
+                "promoReason2": "खाते को बॉट से जोड़ने के लिए।",
+                "promoReason3": "अपने खेलों पर अच्छे परिणाम प्राप्त करने के लिए।",
+                "promoReason4": "अपनी जीत को अधिकतम करने के लिए।",
+                "promoReason5": "अपनी तरफ से भाग्य लाने के लिए।",
+                "createAccountSubtitle": "अपनी पसंद के सट्टेबाज पर अपना खाता बनाने और हमारे प्रोमो कोड के साथ स्वागत बोनस का आनंद लेने के लिए नीचे दिए गए लिंक का उपयोग करें!",
+                "createAccountWarning": "🚨 <b>चेतावनी:</b> <b>'FASE9' या 'KM23' प्रोमो कोड के बिना</b> पंजीकरण बॉट के आपके खाते से कनेक्शन को बाधित कर सकता है और आपकी संभावनाओं को कम कर सकता है।",
+                "yourPromoCode": "आपका प्रोमो कोड: <span style=\"color: white;\">FASE9</span> या <span style=\"color: white;\">KM23</span>",
+                "copyFase9": "FASE9 कॉपी करें",
+                "copyKm23": "KM23 कॉपी करें",
+                "quickRegistration": "🔗 त्वरित पंजीकरण",
+                "officialApp": "📱 आधिकारिक ऐप",
+                "fullRegistration": "🍎 पूर्ण पंजीकरण",
+                "officialLink": "🔗 आधिकारिक लिंक",
+                "vpnWarning": "(यदि लिंक नहीं खुलता है, तो <b>सक्रिय वीपीएन (स्वीडन)</b> के साथ इसे एक्सेस करें। PlayStore/App Store कई मुफ्त सेवाएं प्रदान करता है, उदाहरण के लिए:<b> Vpnify, Planet VPN, Hotspot VPN, आदि!)</b>",
+                "resultsTitle": "📊 ग्राहक परिणाम",
+                "resultsSubtitle": "हमारे उपयोगकर्ताओं की सफलताओं की खोज करें। प्रत्येक छवि हमारे हैक की प्रभावशीलता का प्रमाण है।"
+            },
+            "so": { // Somali
+                "menuTitle": "Ku soo dhawoow KING OF APPLE HACK!",
+                "menuSubtitle": "Dooro mid ka mid ah xulashooyinka hoose.",
+                "playGameBtn": "Bilow Guul 🍎",
+                "instructionsBtn": "📜 Tilmaamaha",
+                "resultsBtn": "📊 Natiijooyinka Macmiilka",
+                "createAccountBtn": "⚙️ Samee Akoon",
+                "menuFooter": "waxaa qoray @winner pronos",
+                "scrollingText": "Hubi inaad akhriday tilmaamaha si aad uga fogaato inaad lumiso lacagtaada!",
+                "registerLink": "<u>Riix halkan si aad isku diiwaan geliso</u>",
+                "newGameBtn": "Ciyaar Cusub",
+                "showAppleBtn": "Muuji Tufaaxa",
+                "backToMenuBtn": "⬅️ Ku noqo Menu",
+                "instructionsTitle": "📜 Tilmaamaha Bot-ka",
+                "instructionTitle1": "SIDEED U SHAQAYSAA🤖",
+                "instructionContent1_1": "🤖 King Of Apple Hack waa qalab horumarsan oo loogu talagalay inuu kaa caawiyo inaad sare u qaaddo fursadahaaga guusha ee ciyaarta 'Apple of Fortune' ee goobaha kala duwan ee sharadka internetka.",
+                "instructionContent1_2": "⚜️ Algorithm-keena wuxuu isticmaalaa xog adag iyo falanqayn saadaalin ah si loo aqoonsado meelaha ugu macquulsan ee tufaaxa🍎 uu ku yaal, taas oo ku siinaysa faa'iido istiraatiiji ah.",
+                "instructionTitle2": "SIDEED U ISTICMAASHAA HACK-KA? 💰",
+                "instructionContent2_1": "Si aad u hesho faa'iido badan, raac tallaabooyinkan:",
+                "instructionContent2_2": "🟢 1. <b>Bilow ciyaar cusub</b> abka King Of Apple Hack adiga oo riixaya 'CIYAAR CUSUB'. 💸",
+                "instructionContent2_3": "🟢 2. <b>Muuji tufaaxa</b> Hack-ku wuxuu soo saari doonaa booska tufaaxa ee safka koowaad ee ciyaarta.",
+                "instructionContent2_4": "🟢 3. <b>Fur ciyaarta 'Apple of Fortune'</b> ee sharad-bixiyahaaga aad jeceshahay:",
+                "instructionContent2_5": "(Haddii xiriiriyaha uusan furmin, ku gal <b>VPN firfircoon (Sweden)</b>. PlayStore/App Store waxay bixiyaan adeegyo badan oo bilaash ah, tusaale ahaan:<b> Vpnify, Planet VPN, Hotspot VPN, iwm.!)</b>",
+                "instructionContent2_6": "🚨 <b>DIGNIIN:</b> Diiwaangelinta <b>la'aanteed koodhka xayaysiinta FASE9</b> waxay carqaladayn kartaa isku xirka bot-ka akoonkaaga waxayna sababi kartaa inaad lumiso lacagtaada.",
+                "instructionContent2_7": "🟢 4.<b> Bilow ciyaar</b> sharad-bixiyahaaga.🍎.",
+                "instructionContent2_8": "🟢 5.<b>Warbixinta booska</b> ay tilmaameen hack-keena ciyaarta dhabta ah ee sharad-bixiyahaaga.",
+                "instructionContent2_9": "🟢 6.<b>Safka saf u soco</b>: ka dib markaad furto safka sharad-bixiyaha, ku noqo abka King Of Apple Hack, riix 'MUJI TUFAAXA' si aad u hesho saadaasha safka xiga.",
+                "instructionContent2_10": "🟢 7.<b> Qaado guulahaaga</b> markaad gaarto hadafkaaga.",
+                "instructionContent2_11": "🟢 8. Haddii ay dhacdo natiijo aan lagu guulaysan, waxaan kugula talineynaa inaad <b>labanlaabto (x²) qaddarkaaga</b> si aad u daboosho khasaaraha oo dhan natiijada xigta. 📈",
+                "instructionTitle3": "QAABKA UGU WANAAGSAN (MUHIIM) 📊",
+                "instructionContent3_1": "Si aad u hesho waxtarka ugu badan iyo si aad uga fogaato ogaanshaha, waxaan si adag kugula talineynaa inaad ku ciyaarto qaab gaar ah oo sharad ah oo ku saabsan sharad-bixiyahaaga:",
+                "instructionContent3_2": "<b>Isticmaal akoon rasmi ah KM23 AMA FASE9:</b> Aad qaybta 'Samee Akoon' ee hack-ka oo samee akoonkaaga cusub ee RASMIGA AH adoo isticmaalaya koodhka xayaysiinta KM23 AMA FASE9 si aad isugu xirto hack-ka akoonkaaga sharad-bixiyaha oo aad dhigto fursadaha oo dhan dhinacaaga.",
+                "instructionContent3_3": "<b>Korodhsiin tartiib tartiib ah:</b> Si tartiib tartiib ah u kordhi qaddarkaaga safafka xiga.",
+                "instructionContent3_4": "<b>Xaddid tirada ciyaaraha:</b> Ha ciyaarin wax ka badan 5-7 ciyaar 30 daqiiqo gudahood adoo isticmaalaya hack-ka. Kala bixi fadhiyadaada.",
+                "instructionContent3_5": "Dhaqamadan ayaa yareeya khatarta ogaanshaha waxayna hubiyaan cimriga dheer ee waxtarka hack-ka.",
+                "instructionTitle4": "CAAWIMAAD IYO WAXYAABAHA CUSUB ❓",
+                "instructionContent4_1": "Wixii su'aalo ah, caawimaad farsamo ama wixii ku saabsan waxyaabaha ugu dambeeyay ee hack-ka, fadlan nagala soo xiriir kanaaladayada rasmiga ah:💬.",
+                "instructionContent4_2": "<b>Telegram:</b>@king_of_apple_hack_support",
+                "instructionContent4_3": "<b>Email:</b>support@kingofapplehack.com",
+                "instructionContent4_4": "Waxaan si joogto ah u horumarineynaa algorithm-ka si loo hubiyo natiijooyinka ugu wanaagsan.",
+                "createAccountTitle": "SAMEE AKOONKAAGA RASMIGA AH",
+                "promoInstructionsTitle": "MAXAA LOO ISTICMAALAA KOODHKA XAYAYSIINTA FASE9 AMA KM23?",
+                "promoReason1": "Si aad u hesho akoon sharad rasmi ah.",
+                "promoReason2": "Si aad akoonka ugu xirto bot-ka.",
+                "promoReason3": "Si aad u hesho natiijooyin wanaagsan ciyaarahaaga.",
+                "promoReason4": "Si aad u sare u qaaddo guulahaaga.",
+                "promoReason5": "Si aad nasiibkaaga dhinacaaga uga dhigto.",
+                "createAccountSubtitle": "Isticmaal xiriiriyeyaasha hoose si aad u sameyso akoonkaaga sharad-bixiyaha aad jeceshahay oo ku raaxayso gunnooyinka soo dhaweynta ee koodhkeena xayaysiinta!",
+                "createAccountWarning": "🚨 <b>DIGNIIN:</b> Diiwaangelinta <b>la'aanteed koodhka xayaysiinta 'FASE9' ama 'KM23'</b> waxay carqaladayn kartaa isku xirka bot-ka akoonkaaga waxayna yareyn kartaa fursadahaaga.",
+                "yourPromoCode": "Koodhkaaga xayaysiinta: <span style=\"color: white;\">FASE9</span> ama <span style=\"color: white;\">KM23</span>",
+                "copyFase9": "Nuqul FASE9",
+                "copyKm23": "Nuqul KM23",
+                "quickRegistration": "🔗 Diiwaangelin degdeg ah",
+                "officialApp": "📱 App-ka rasmiga ah",
+                "fullRegistration": "🍎 Diiwaangelin dhamaystiran",
+                "officialLink": "🔗 Xiriiriye rasmi ah",
+                "vpnWarning": "(Haddii xiriiriyaha uusan furmin, ku gal <b>VPN firfircoon (Sweden)</b>. PlayStore/App Store waxay bixiyaan adeegyo badan oo bilaash ah, tusaale ahaan:<b> Vpnify, Planet VPN, Hotspot VPN, iwm.!)</b>",
+                "resultsTitle": "📊 Natiijooyinka Macmiilka",
+                "resultsSubtitle": "Soo ogow guulaha isticmaalayaashayada. Sawir kastaa waa caddayn ku saabsan waxtarka hack-keena."
+            },
+            "tr": { // Turkish
+                "menuTitle": "KING OF APPLE HACK'e Hoş Geldiniz!",
+                "menuSubtitle": "Aşağıdaki seçeneklerden birini seçin.",
+                "playGameBtn": "Kazanmaya Başla 🍎",
+                "instructionsBtn": "📜 Talimatlar",
+                "resultsBtn": "📊 Müşteri Sonuçları",
+                "createAccountBtn": "⚙️ Hesap Oluştur",
+                "menuFooter": "@winner pronos tarafından",
+                "scrollingText": "Paranızı kaybetmemek için talimatları okuduğunuzdan emin olun!",
+                "registerLink": "<u>Kaydolmak için buraya tıklayın</u>",
+                "newGameBtn": "Yeni Oyun",
+                "showAppleBtn": "Elmayı Göster",
+                "backToMenuBtn": "⬅️ Menüye Geri Dön",
+                "instructionsTitle": "📜 Bot Talimatları",
+                "instructionTitle1": "NASIL ÇALIŞIR🤖",
+                "instructionContent1_1": "🤖 King Of Apple Hack, çeşitli çevrimiçi bahis platformlarında 'Apple of Fortune' oyununda başarı şansınızı en üst düzeye çıkarmak için tasarlanmış gelişmiş bir araçtır.",
+                "instructionContent1_2": "⚜️ Algoritmamız, elmanın🍎 bulunduğu en olası kareleri belirlemek için karmaşık veriler ve tahmini analiz kullanır ve size stratejik bir avantaj sağlar.",
+                "instructionTitle2": "HACK NASIL KULLANILIR? 💰",
+                "instructionContent2_1": "Maksimum kar elde etmek için şu adımları izleyin:",
+                "instructionContent2_2": "🟢 1. King Of Apple Hack uygulamasında 'YENİ OYUN' düğmesine tıklayarak <b>yeni bir oyun başlatın</b>. 💸",
+                "instructionContent2_3": "🟢 2. <b>Elmayı göster</b> Hack, oyunun ilk satırı için elmanın konumunu oluşturacaktır.",
+                "instructionContent2_4": "🟢 3. En sevdiğiniz bahisçide 'Apple of Fortune' oyununu <b>açın</b>:",
+                "instructionContent2_5": "(Eğer link açılmıyorsa, <b>aktif bir VPN (İsveç)</b> ile erişin. PlayStore/App Store birçok ücretsiz hizmet sunar, örneğin:<b> Vpnify, Planet VPN, Hotspot VPN, vb.!)</b>",
+                "instructionContent2_6": "🚨 <b>UYARI:</b> <b>FASE9 promosyon kodu olmadan</b> kayıt, botun hesabınıza bağlantısını bozabilir ve paranızı kaybetmenize neden olabilir.",
+                "instructionContent2_7": "🟢 4. Bahisçinizde <b>bir oyun başlatın</b>.🍎.",
+                "instructionContent2_8": "🟢 5. Hack'imiz tarafından belirtilen konumu gerçek oyunda bahisçinizde <b>bildirin</b>.",
+                "instructionContent2_9": "🟢 6. <b>Satır satır ilerleyin</b>: bahisçide bir satır açtıktan sonra King Of Apple Hack uygulamasına geri dönün, bir sonraki satır için tahminleri almak için 'ELMA GÖSTER' düğmesine tıklayın.",
+                "instruction2_10": "🟢 7. Hedefinize ulaştıktan sonra <b>kazançlarınızı nakde çevirin</b>.",
+                "instructionContent2_11": "🟢 8. Başarısız bir sonuç durumunda, bir sonraki sonuçla kaybı tamamen karşılamak için <b>bahisinizi ikiye katlamanızı (x²)</b> öneririz. 📈",
+                "instructionTitle3": "OPTİMAL YAPILANDIRMA (ÖNEMLİ) 📊",
+                "instructionContent3_1": "Maksimum verimlilik ve tespitten kaçınmak için, bahisçinizde belirli bir bahis yapılandırmasıyla oynamanızı şiddetle tavsiye ederiz:",
+                "instructionContent3_2": "<b>Resmi bir KM23 VEYA FASE9 hesabı kullanın:</b> Hack'in 'Hesap Oluştur' oturumuna gidin ve hack'i bahisçi hesabınıza bağlamak ve tüm şansları kendi tarafınıza çekmek için KM23 VEYA FASE9 promosyon koduyla yeni RESMİ hesabınızı oluşturun.",
+                "instructionContent3_3": "<b>Aşamalı artış:</b> Sonraki satırlarda bahisinizi kademeli olarak artırın.",
+                "instructionContent3_4": "<b>Oyun sayısını sınırlayın:</b> Hack ile 30 dakikada 5-7'den fazla oyun oynamayın. Seanslarınızı aralıklı yapın.",
+                "instructionContent3_5": "Bu uygulamalar, tespit riskini azaltır ve hack'in etkinliğinin uzun ömürlülüğünü sağlar.",
+                "instructionTitle4": "YARDIM VE GÜNCELLEMELER ❓",
+                "instructionContent4_1": "Herhangi bir sorunuz, teknik yardım veya hack'in en son güncellemeleri için lütfen resmi kanallarımız aracılığıyla bizimle iletişime geçin:💬.",
+                "instructionContent4_2": "<b>Telegram:</b>@king_of_apple_hack_support",
+                "instructionContent4_3": "<b>E-posta:</b>support@kingofapplehack.com",
+                "instructionContent4_4": "En iyi sonuçları garanti etmek için algoritmayı sürekli geliştiriyoruz.",
+                "createAccountTitle": "RESMİ HESABINIZI OLUŞTURUN",
+                "promoInstructionsTitle": "NEDEN FASE9 VEYA KM23 PROMOSYON KODUNU KULLANMALISINIZ?",
+                "promoReason1": "Resmi bir bahis hesabına sahip olmak için.",
+                "promoReason2": "Hesabı bota bağlamak için.",
+                "promoReason3": "Oyunlarınızda iyi sonuçlar almak için.",
+                "promoReason4": "Kazançlarınızı en üst düzeye çıkarmak için.",
+                "promoReason5": "Şansı kendi tarafınıza çekmek için.",
+                "createAccountSubtitle": "Seçtiğiniz bahisçide hesabınızı oluşturmak ve promosyon kodumuzla hoş geldin bonuslarından yararlanmak için aşağıdaki bağlantıları kullanın!",
+                "createAccountWarning": "🚨 <b>UYARI:</b> <b>'FASE9' veya 'KM23' promosyon kodu olmadan</b> kayıt, botun hesabınıza bağlantısını bozabilir ve şansınızı azaltabilir.",
+                "yourPromoCode": "Promosyon kodunuz: <span style=\"color: white;\">FASE9</span> veya <span style=\"color: white;\">KM23</span>",
+                "copyFase9": "FASE9 Kopyala",
+                "copyKm23": "KM23 Kopyala",
+                "quickRegistration": "🔗 Hızlı Kayıt",
+                "officialApp": "📱 Resmi Uygulama",
+                "fullRegistration": "🍎 Tam Kayıt",
+                "officialLink": "🔗 Resmi Bağlantı",
+                "vpnWarning": "(Eğer link açılmıyorsa, <b>aktif bir VPN (İsveç)</b> ile erişin. PlayStore/App Store birçok ücretsiz hizmet sunar, örneğin:<b> Vpnify, Planet VPN, Hotspot VPN, vb.!)</b>",
+                "resultsTitle": "📊 Müşteri Sonuçları",
+                "resultsSubtitle": "Kullanıcılarımızın başarılarını keşfedin. Her görsel, hack'imizin etkinliğinin bir kanıtıdır."
+            },
+            "ru": { // Russian
+                "menuTitle": "Добро пожаловать в KING OF APPLE HACK!",
+                "menuSubtitle": "Выберите один из вариантов ниже.",
+                "playGameBtn": "Начать выигрывать 🍎",
+                "instructionsBtn": "📜 Инструкции",
+                "resultsBtn": "📊 Результаты клиентов",
+                "createAccountBtn": "⚙️ Создать аккаунт",
+                "menuFooter": "от @winner pronos",
+                "scrollingText": "Убедитесь, что вы прочитали инструкции, чтобы избежать потери средств!",
+                "registerLink": "<u>Нажмите здесь, чтобы зарегистрироваться</u>",
+                "newGameBtn": "Новая игра",
+                "showAppleBtn": "Показать яблоко",
+                "backToMenuBtn": "⬅️ Назад в меню",
+                "instructionsTitle": "📜 Инструкции бота",
+                "instructionTitle1": "КАК ЭТО РАБОТАЕТ🤖",
+                "instructionContent1_1": "🤖 King Of Apple Hack - это продвинутый инструмент, разработанный, чтобы помочь вам максимизировать свои шансы на успех в игре 'Apple of Fortune' на различных онлайн-платформах для ставок.",
+                "instructionContent1_2": "⚜️ Наш алгоритм использует сложные данные и предиктивный анализ для определения наиболее вероятных квадратов, где находится яблоко🍎, предоставляя вам стратегическое преимущество.",
+                "instructionTitle2": "КАК ИСПОЛЬЗОВАТЬ ХАК? 💰",
+                "instructionContent2_1": "Для получения максимальной прибыли выполните следующие шаги:",
+                "instructionContent2_2": "🟢 1. <b>Начните новую игру</b> в приложении King Of Apple Hack, нажав 'НОВАЯ ИГРА'. 💸",
+                "instructionContent2_3": "🟢 2. <b>Показать яблоко</b> Хак сгенерирует позицию яблока для первой линии игры.",
+                "instructionContent2_4": "🟢 3. <b>Откройте игру 'Apple of Fortune'</b> на вашем любимом букмекере:",
+                "instructionContent2_5": "(Если ссылка не открывается, зайдите через <b>активный VPN (Швеция)</b>. PlayStore/App Store предлагает множество бесплатных сервисов, например:<b> Vpnify, Planet VPN, Hotspot VPN, и т.д.!)</b>",
+                "instructionContent2_6": "🚨 <b>ВНИМАНИЕ:</b> регистрация <b>без промокода FASE9</b> может нарушить соединение бота с вашим аккаунтом и привести к потере ваших средств.",
+                "instructionContent2_7": "🟢 4.<b> Начните игру</b> на вашем букмекере.🍎.",
+                "instructionContent2_8": "🟢 5.<b>Сообщите позицию</b>, указанную нашим хаком в реальной игре на вашем букмекере.",
+                "instructionContent2_9": "🟢 6.<b>Продолжайте строка за строкой</b>: после открытия строки на букмекере, вернитесь в приложение King Of Apple Hack, нажмите 'ПОКАЗАТЬ ЯБЛОКО', чтобы получить прогнозы для следующей строки.",
+                "instructionContent2_10": "🟢 7.<b> Выведите свои выигрыши</b>, как только достигнете своей цели.",
+                "instructionContent2_11": "🟢 8. В случае неудачного результата, мы рекомендуем <b>удвоить (x²) вашу ставку</b>, чтобы полностью покрыть убыток следующим результатом. 📈",
+                "instructionTitle3": "ОПТИМАЛЬНАЯ КОНФИГУРАЦИЯ (ВАЖНО) 📊",
+                "instructionContent3_1": "Для максимальной эффективности и во избежание обнаружения, мы настоятельно рекомендуем играть с определенной конфигурацией ставок на вашем букмекере:",
+                "instructionContent3_2": "<b>Используйте официальный аккаунт KM23 ИЛИ FASE9:</b> Перейдите в раздел 'Создать аккаунт' хака и создайте свой новый ОФИЦИАЛЬНЫЙ аккаунт с промокодом KM23 ИЛИ FASE9, чтобы подключить хак к вашему аккаунту букмекера и поставить все шансы на свою сторону.",
+                "instructionContent3_3": "<b>Прогрессивное увеличение:</b> Постепенно увеличивайте свою ставку на последующих линиях.",
+                "instructionContent3_4": "<b>Ограничьте количество игр:</b> Не играйте более 5-7 игр за 30 минут с хаком. Разделите свои сессии.",
+                "instructionContent3_5": "Эти практики снижают риск обнаружения и обеспечивают долговечность эффективности хака.",
+                "instructionTitle4": "ПОМОЩЬ И ОБНОВЛЕНИЯ ❓",
+                "instructionContent4_1": "По любым вопросам, технической помощи или для получения последних обновлений хака, пожалуйста, свяжитесь с нами через наши официальные каналы:💬.",
+                "instructionContent4_2": "<b>Telegram:</b>@king_of_apple_hack_support",
+                "instructionContent4_3": "<b>Email:</b>support@kingofapplehack.com",
+                "instructionContent4_4": "Мы постоянно улучшаем алгоритм, чтобы гарантировать лучшие результаты.",
+                "createAccountTitle": "СОЗДАЙТЕ СВОЙ ОФИЦИАЛЬНЫЙ АККАУНТ",
+                "promoInstructionsTitle": "ЗАЧЕМ ИСПОЛЬЗОВАТЬ ПРОМОКОД FASE9 ИЛИ KM23?",
+                "promoReason1": "Чтобы иметь официальный игровой аккаунт.",
+                "promoReason2": "Чтобы подключить аккаунт к боту.",
+                "promoReason3": "Чтобы получать хорошие результаты в ваших играх.",
+                "promoReason4": "Чтобы максимизировать свои выигрыши.",
+                "promoReason5": "Чтобы удача была на вашей стороне.",
+                "createAccountSubtitle": "Используйте ссылки ниже, чтобы создать свой аккаунт на выбранном букмекере и наслаждаться приветственными бонусами с нашим промокодом!",
+                "createAccountWarning": "🚨 <b>ВНИМАНИЕ:</b> регистрация <b>без промокода 'FASE9' или 'KM23'</b> может нарушить соединение бота с вашим аккаунтом и снизить ваши шансы.",
+                "yourPromoCode": "Ваш промокод: <span style=\"color: white;\">FASE9</span> или <span style=\"color: white;\">KM23</span>",
+                "copyFase9": "Копировать FASE9",
+                "copyKm23": "Копировать KM23",
+                "quickRegistration": "🔗 Быстрая регистрация",
+                "officialApp": "📱 Официальное приложение",
+                "fullRegistration": "🍎 Полная регистрация",
+                "officialLink": "🔗 Официальная ссылка",
+                "vpnWarning": "(Если ссылка не открывается, зайдите через <b>активный VPN (Швеция)</b>. PlayStore/App Store предлагает множество бесплатных сервисов, например:<b> Vpnify, Planet VPN, Hotspot VPN, и т.д.!)</b>",
+                "resultsTitle": "📊 Результаты клиентов",
+                "resultsSubtitle": "Откройте для себя успехи наших пользователей. Каждое изображение - это подтверждение эффективности нашего хака."
+            },
+            "es": { // Spanish
+                "menuTitle": "¡Bienvenido a KING OF APPLE HACK!",
+                "menuSubtitle": "Elija una opción a continuación.",
+                "playGameBtn": "Empezar a ganar 🍎",
+                "instructionsBtn": "📜 Instrucciones",
+                "resultsBtn": "📊 Resultados de clientes",
+                "createAccountBtn": "⚙️ Crear una cuenta",
+                "menuFooter": "por @winner pronos",
+                "scrollingText": "¡Asegúrese de haber leído las instrucciones para evitar perder sus fondos!",
+                "registerLink": "<u>Haga clic aquí para registrarse</u>",
+                "newGameBtn": "Nuevo juego",
+                "showAppleBtn": "Mostrar manzana",
+                "backToMenuBtn": "⬅️ Volver al menú",
+                "instructionsTitle": "📜 Instrucciones del bot",
+                "instructionTitle1": "CÓMO FUNCIONA🤖",
+                "instructionContent1_1": "🤖 King Of Apple Hack es una herramienta avanzada diseñada para ayudarte a maximizar tus posibilidades de éxito en el juego 'Apple of Fortune' en varias plataformas de apuestas en línea.",
+                "instructionContent1_2": "⚜️ Nuestro algoritmo utiliza datos complejos y análisis predictivos para identificar los cuadrados más probables donde se encuentra la manzana🍎, lo que te otorga una ventaja estratégica.",
+                "instructionTitle2": "¿CÓMO USAR EL HACK? 💰",
+                "instructionContent2_1": "Para obtener el máximo beneficio, siga estos pasos:",
+                "instructionContent2_2": "🟢 1. <b>Inicie un nuevo juego</b> en la aplicación King Of Apple Hack haciendo clic en 'NUEVO JUEGO'. 💸",
+                "instructionContent2_3": "🟢 2. <b>Mostrar manzana</b> El hack generará la posición de la manzana para la primera línea del juego.",
+                "instructionContent2_4": "🟢 3. <b>Abra el juego 'Apple of Fortune'</b> en su casa de apuestas favorita:",
+                "instructionContent2_5": "(Si el enlace no se abre, acceda a él con una <b>VPN activa (Suecia)</b>. PlayStore/App Store ofrece muchos servicios gratuitos, por ejemplo:<b> Vpnify, Planet VPN, Hotspot VPN, ¡etc.!)</b>",
+                "instructionContent2_6": "🚨 <b>ATENCIÓN:</b> un registro <b>sin el código de promoción FASE9</b> podría interrumpir la conexión del bot a su cuenta y hacerle perder sus fondos.",
+                "instructionContent2_7": "🟢 4.<b> Inicie una partida</b> en su casa de apuestas.🍎.",
+                "instructionContent2_8": "🟢 5.<b>Reporte la posición</b> indicada por nuestro hack en el juego real en su casa de apuestas.",
+                "instructionContent2_9": "🟢 6.<b>Proceda línea por línea</b>: después de abrir una línea en la casa de apuestas, regrese a la aplicación King Of Apple Hack, haga clic en 'MOSTRAR MANZANA' para obtener las predicciones de la siguiente línea.",
+                "instructionContent2_10": "🟢 7.<b> Retire sus ganancias</b> una vez que haya alcanzado su objetivo.",
+                "instructionContent2_11": "🟢 8. En caso de un resultado infructuoso, le recomendamos <b>duplicar (x²) su apuesta</b> para cubrir completamente la pérdida con el siguiente resultado. 📈",
+                "instructionTitle3": "CONFIGURACIÓN ÓPTIMA (IMPORTANTE) 📊",
+                "instructionContent3_1": "Para una máxima eficiencia y para evitar la detección, le recomendamos encarecidamente jugar con una configuración de apuesta específica en su casa de apuestas:",
+                "instructionContent3_2": "<b>Utilice una cuenta oficial KM23 O FASE9:</b> Vaya a la sesión 'Crear una cuenta' del hack y cree su nueva cuenta OFICIAL con el código de promoción KM23 O FASE9 para conectar el hack con su cuenta de la casa de apuestas y poner todas las probabilidades a su favor.",
+                "instructionContent3_3": "<b>Aumento progresivo:</b> Aumente su apuesta progresivamente en las siguientes líneas.",
+                "instructionContent3_4": "<b>Limite el número de partidas:</b> No juegue más de 5-7 partidas en 30 minutos con el hack. Espacie sus sesiones.",
+                "instructionContent3_5": "Estas prácticas reducen el riesgo de detección y aseguran la longevidad de la efectividad del hack.",
+                "instructionTitle4": "ASISTENCIA Y ACTUALIZACIONES ❓",
+                "instructionContent4_1": "Para cualquier pregunta, asistencia técnica o para las últimas actualizaciones del hack, contáctenos a través de nuestros canales oficiales:💬.",
+                "instructionContent4_2": "<b>Telegram:</b>@king_of_apple_hack_support",
+                "instructionContent4_3": "<b>Correo electrónico:</b>support@kingofapplehack.com",
+                "instructionContent4_4": "Mejoramos constantemente el algoritmo para garantizar los mejores resultados.",
+                "createAccountTitle": "CREAR SU CUENTA OFICIAL",
+                "promoInstructionsTitle": "¿POR QUÉ USAR EL CÓDIGO DE PROMOCIÓN FASE9 O KM23?",
+                "promoReason1": "Para tener una cuenta oficial de apuestas.",
+                "promoReason2": "Para conectar la cuenta al bot.",
+                "promoReason3": "Para obtener buenos resultados en sus juegos.",
+                "promoReason4": "Para maximizar sus ganancias.",
+                "promoReason5": "Para poner la suerte de su lado.",
+                "createAccountSubtitle": "¡Utilice los enlaces a continuación para crear su cuenta en la casa de apuestas de su elección y disfrute de los bonos de bienvenida con nuestro código de promoción!",
+                "createAccountWarning": "🚨 <b>ATENCIÓN:</b> un registro <b>sin el código de promoción 'FASE9' o 'KM23'</b> podría interrumpir la conexión del bot a su cuenta y reducir sus posibilidades.",
+                "yourPromoCode": "Su código de promoción: <span style=\"color: white;\">FASE9</span> o <span style=\"color: white;\">KM23</span>",
+                "copyFase9": "Copiar FASE9",
+                "copyKm23": "Copiar KM23",
+                "quickRegistration": "🔗 Registro rápido",
+                "officialApp": "📱 Aplicación oficial",
+                "fullRegistration": "🍎 Registro completo",
+                "officialLink": "🔗 Enlace oficial",
+                "vpnWarning": "(Si el enlace no se abre, acceda a él con una <b>VPN activa (Suecia)</b>. PlayStore/App Store ofrece muchos servicios gratuitos, por ejemplo:<b> Vpnify, Planet VPN, Hotspot VPN, ¡etc.!)</b>",
+                "resultsTitle": "📊 Resultados de clientes",
+                "resultsSubtitle": "Descubra los éxitos de nuestros usuarios. Cada imagen es un testimonio de la efectividad de nuestro hack."
+            },
+            "pt": { // Portuguese (Portugal)
+                "menuTitle": "Bem-vindo ao KING OF APPLE HACK!",
+                "menuSubtitle": "Escolha uma opção abaixo.",
+                "playGameBtn": "Começar a Ganhar 🍎",
+                "instructionsBtn": "📜 Instruções",
+                "resultsBtn": "📊 Resultados de Clientes",
+                "createAccountBtn": "⚙️ Criar Conta",
+                "menuFooter": "por @winner pronos",
+                "scrollingText": "Certifique-se de ter lido as instruções para evitar perder seus fundos!",
+                "registerLink": "<u>Clique aqui para se registrar</u>",
+                "newGameBtn": "Novo Jogo",
+                "showAppleBtn": "Mostrar Maçã",
+                "backToMenuBtn": "⬅️ Voltar ao Menu",
+                "instructionsTitle": "📜 Instruções do Bot",
+                "instructionTitle1": "COMO FUNCIONA🤖",
+                "instructionContent1_1": "🤖 King Of Apple Hack é uma ferramenta avançada projetada para ajudá-lo a maximizar suas chances de sucesso no jogo 'Apple of Fortune' em várias plataformas de apostas online.",
+                "instructionContent1_2": "⚜️ Nosso algoritmo usa dados complexos e análise preditiva para identificar os quadrados mais prováveis onde a maçã🍎 está localizada, oferecendo-lhe uma vantagem estratégica.",
+                "instructionTitle2": "COMO USAR O HACK? 💰",
+                "instructionContent2_1": "Para obter o máximo lucro, siga estes passos:",
+                "instructionContent2_2": "🟢 1. <b>Comece um novo jogo</b> no aplicativo King Of Apple Hack clicando em 'NOVO JOGO'. 💸",
+                "instructionContent2_3": "🟢 2. <b>Mostrar maçã</b> O hack gerará a posição da maçã para a primeira linha do jogo.",
+                "instructionContent2_4": "🟢 3. <b>Abra o jogo 'Apple of Fortune'</b> na sua casa de apostas favorita:",
+                "instructionContent2_5": "(Se o link não abrir, aceda-o com uma <b>VPN ativa (Suécia)</b>. A PlayStore/App Store oferece muitos serviços gratuitos, por exemplo:<b> Vpnify, Planet VPN, Hotspot VPN, etc.!)</b>",
+                "instructionContent2_6": "🚨 <b>ATENÇÃO:</b> um registo <b>sem o código promocional FASE9</b> poderá perturbar a ligação do bot à sua conta e fazer com que perca os seus fundos.",
+                "instructionContent2_7": "🟢 4.<b> Inicie uma partida</b> na sua casa de apostas.🍎.",
+                "instructionContent2_8": "🟢 5.<b>Reporte a posição</b> indicada pelo nosso hack no jogo real na sua casa de apostas.",
+                "instructionContent2_9": "🟢 6.<b>Prossiga linha por linha</b>: depois de abrir uma linha na casa de apostas, volte ao aplicativo King Of Apple Hack, clique em 'MOSTRAR MAÇÃ' para obter as previsões da próxima linha.",
+                "instructionContent2_10": "🟢 7.<b> Levante os seus ganhos</b> assim que atingir o seu objetivo.",
+                "instructionContent2_11": "🟢 8. Em caso de resultado infrutífero, recomendamos <b>dobrar (x²) a sua aposta</b> para cobrir totalmente a perda com o resultado seguinte. 📈",
+                "instructionTitle3": "CONFIGURAÇÃO ÓTIMA (IMPORTANTE) 📊",
+                "instructionContent3_1": "Para máxima eficiência e para evitar a deteção, recomendamos vivamente jogar com uma configuração de aposta específica na sua casa de apostas:",
+                "instructionContent3_2": "<b>Use uma conta oficial KM23 OU FASE9:</b> Vá para a sessão 'Criar uma conta' do hack e crie sua nova conta OFICIAL com o código promocional KM23 OU FASE9 para conectar o hack à sua conta da casa de apostas e colocar todas as probabilidades a seu favor.",
+                "instructionContent3_3": "<b>Aumento progressivo:</b> Aumente sua aposta progressivamente nas linhas seguintes.",
+                "instructionContent3_4": "<b>Limite o número de partidas:</b> Não jogue mais de 5-7 partidas por 30 minutos com o hack. Espacie as suas sessões.",
+                "instructionContent3_5": "Essas práticas reduzem o risco de deteção e garantem a longevidade da eficácia do hack.",
+                "instructionTitle4": "ASSISTÊNCIA E ATUALIZAÇÕES ❓",
+                "instructionContent4_1": "Para qualquer questão, assistência técnica ou para as últimas atualizações do hack, por favor, contacte-nos através dos nossos canais oficiais:💬.",
+                "instructionContent4_2": "<b>Telegram:</b>@king_of_apple_hack_support",
+                "instructionContent4_3": "<b>Email:</b>support@kingofapplehack.com",
+                "instructionContent4_4": "Estamos constantemente a melhorar o algoritmo para garantir os melhores resultados.",
+                "createAccountTitle": "CRIE A SUA CONTA OFICIAL",
+                "promoInstructionsTitle": "PORQUÊ USAR O CÓDIGO PROMOCIONAL FASE9 OU KM23?",
+                "promoReason1": "Para ter uma conta oficial de apostas.",
+                "promoReason2": "Para conectar a conta ao bot.",
+                "promoReason3": "Para obter bons resultados nos seus jogos.",
+                "promoReason4": "Para maximizar os seus ganhos.",
+                "promoReason5": "Para colocar a sorte do seu lado.",
+                "createAccountSubtitle": "Use os links abaixo para criar sua conta na casa de apostas de sua escolha e aproveite os bónus de boas-vindas com o nosso código promocional!",
+                "createAccountWarning": "🚨 <b>ATENÇÃO:</b> um registo <b>sem o código promocional 'FASE9' ou 'KM23'</b> poderá perturbar a ligação do bot à sua conta e reduzir as suas hipóteses.",
+                "yourPromoCode": "O seu código promocional: <span style=\"color: white;\">FASE9</span> ou <span style=\"color: white;\">KM23</span>",
+                "copyFase9": "Copiar FASE9",
+                "copyKm23": "Copiar KM23",
+                "quickRegistration": "🔗 Registo rápido",
+                "officialApp": "📱 Aplicação oficial",
+                "fullRegistration": "🍎 Registo completo",
+                "officialLink": "🔗 Link oficial",
+                "vpnWarning": "(Se o link não abrir, aceda-o com uma <b>VPN ativa (Suécia)</b>. A PlayStore/App Store oferece muitos serviços gratuitos, por exemplo:<b> Vpnify, Planet VPN, Hotspot VPN, etc.!)</b>",
+                "resultsTitle": "📊 Resultados de Clientes",
+                "resultsSubtitle": "Descubra os sucessos dos nossos utilizadores. Cada imagem é um testemunho da eficácia do nosso hack."
+            }
+        };
+
+        const languages = [
+            { code: "en", name: "English", flag: "https://flagcdn.com/w20/gb.png" }, // Using GB flag for English
+            { code: "fr", name: "Français", flag: "https://flagcdn.com/w20/fr.png" },
+            { code: "ar", name: "العربية (الإمارات)", flag: "https://flagcdn.com/w20/ae.png" },
+            { code: "az", name: "Azərbaycanca", flag: "https://flagcdn.com/w20/az.png" },
+            { code: "hi", name: "हिन्दी", flag: "https://flagcdn.com/w20/in.png" },
+            { code: "so", name: "Soomaali", flag: "https://flagcdn.com/w20/so.png" },
+            { code: "tr", name: "Türkçe", flag: "https://flagcdn.com/w20/tr.png" },
+            { code: "ru", name: "Русский", flag: "https://flagcdn.com/w20/ru.png" },
+            { code: "es", name: "Español", flag: "https://flagcdn.com/w20/es.png" },
+            { code: "pt", name: "Português (Portugal)", flag: "https://flagcdn.com/w20/pt.png" }
+        ];
+
+        let currentLanguage = "en"; // Default language
+
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            // Update the lang attribute of the HTML tag
+            document.documentElement.lang = lang;
+
+            // Update all elements with data-lang-key attribute
+            document.querySelectorAll('[data-lang-key]').forEach(element => {
+                const key = element.getAttribute('data-lang-key');
+                if (translations[currentLanguage] && translations[currentLanguage][key]) {
+                    // Check if the content contains HTML (like <b> tags)
+                    if (translations[currentLanguage][key].includes('<b>') || translations[currentLanguage][key].includes('<u>') || translations[currentLanguage][key].includes('<span>')) {
+                        element.innerHTML = translations[currentLanguage][key];
+                    } else {
+                        element.textContent = translations[currentLanguage][key];
+                    }
+                }
+            });
+
+            // Update active state for language buttons
+            document.querySelectorAll('#language-selector button').forEach(button => {
+                if (button.dataset.lang === lang) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+        }
+
+        function createLanguageSelector() {
+            const langSelectorContainer = document.getElementById('language-selector');
+            languages.forEach(lang => {
+                const button = document.createElement('button');
+                button.dataset.lang = lang.code;
+                button.innerHTML = `<img src="${lang.flag}" alt="${lang.name} Flag"> ${lang.name}`;
+                button.addEventListener('click', () => setLanguage(lang.code));
+                langSelectorContainer.appendChild(button);
+            });
+        }
+
+        // --- Fonctions de gestion des pages ---
+        function showPage(pageToShow) {
+            // Cacher toutes les pages
+            const allPages = [menuPage, gamePage, instructionsPage, createAccountPage, resultsPage];
+            allPages.forEach(page => {
+                page.style.display = 'none';
+            });
+            // Afficher la page désirée
+            pageToShow.style.display = 'flex';
+            // Pour la page d'instructions, réinitialiser l'état des sections déroulantes
+            if (pageToShow.id === 'instructions-page') {
+                document.querySelectorAll('.instruction-content').forEach(content => {
+                    content.style.display = 'block';
+                });
+                document.querySelectorAll('.instruction-title').forEach(title => {
+                    title.classList.remove('active');
+                    title.querySelector('.arrow').style.transform = 'rotate(0deg)';
+                });
+            }
+        }
+
+        function showMainMenu() {
+            showPage(menuPage);
+            setLanguage(currentLanguage); // Ensure content is in current language when returning to menu
+        }
+
+        function startGame() {
+            showPage(gamePage);
+            resetGame();
+        }
+
+        function showInstructions() {
+            showPage(instructionsPage);
+        }
+
+        function showCreateAccountPage() {
+            showPage(createAccountPage);
+        }
+
+        function showResultsPage() { 
+            showPage(resultsPage);
+            updatePhoto();  
+        }
+
+        // --- Fonctions du jeu de la pomme ---
+        function resetGame() {
+            allRows.forEach(row => {
+                const circlesInRow = row.querySelectorAll('.circle');
+                circlesInRow.forEach(circle => {
+                    circle.style.backgroundImage = `url('${woodenCircleImage}')`;
+                });
+            });
+            currentRowIndex = 0;
+            showAppleBtn.disabled = false;
+        }
+
+        function showRandomApple() {
+            if (currentRowIndex >= allRows.length) {
+                showAppleBtn.disabled = true;
+                return;
+            }
+
+            showAppleBtn.disabled = true;
+
+            const targetRow = allRows[currentRowIndex];
+            const circlesInTargetRow = targetRow.querySelectorAll('.circle');
+
+            circlesInTargetRow.forEach(circle => {
+                circle.style.backgroundImage = `url('${transparentCircleImage}')`;
+            });
+
+            setTimeout(() => {
+                const randomIndex = Math.floor(Math.random() * circlesInTargetRow.length);
+                circlesInTargetRow[randomIndex].style.backgroundImage = `url('${appleImage}')`;
+
+                appleSound.currentTime = 0;
+                appleSound.play().catch(e => console.error("Erreur lors de la lecture du son :", e));
+
+                currentRowIndex++;
+
+                if (currentRowIndex < allRows.length) {
+                    showAppleBtn.disabled = false;
+                } else {
+                    showAppleBtn.disabled = true;
+                }
+            }, 200);
+        }
+
+        // --- Album photo (nouveau code pour la page Résultats) ---
+        const photoAlbumImages = [
+            '1.jpg', '2.jpg', '3.jpg', '4.jpg',
+            '5.jpg', '6.jpg', '7.jpg', '8.jpg'
+        ];
+        let currentPhotoIndex = 0;
+
+        const currentImageElementResults = document.getElementById('current-image-results');
+        const prevPhotoBtnResults = document.getElementById('prev-photo-btn-results');
+        const nextPhotoBtnResults = document.getElementById('next-photo-btn-results');
+
+        function updatePhoto() {
+            currentImageElementResults.style.opacity = '0'; // Cache l'image pour la transition
+            setTimeout(() => {
+                currentImageElementResults.src = photoAlbumImages?.[currentPhotoIndex] || 'placeholder.png'; // Ajout d'une image de remplacement en cas d'erreur
+                currentImageElementResults.style.opacity = '1'; // Affiche la nouvelle image
+            }, 200); // Temps correspondant à la transition CSS
+        }
+
+        prevPhotoBtnResults.addEventListener('click', () => {
+            currentPhotoIndex = (currentPhotoIndex - 1 + photoAlbumImages.length) % photoAlbumImages.length;
+            updatePhoto();
+        });
+
+        nextPhotoBtnResults.addEventListener('click', () => {
+            currentPhotoIndex = (currentPhotoIndex + 1) % photoAlbumImages.length;
+            updatePhoto();
+        });
+
+        // --- Liens d'affiliation 
+        const affiliationLinks = {
+            '1xbet': {
+                'official': 'https://affpa.top/L?tag=d_4111676m_97c_&site=4111676&ad=97', 
+                'app': 'https://affpa.top/L?tag=d_4111676m_70865c_&site=4111676&ad=70865',
+                'iphone': 'https://refpa3267686.top/L?tag=d_1040187m_1599c_&site=1040187&ad=1599'
+            },
+            'melbet': {
+                'official': 'https://refpakrtsb.top/L?tag=d_4093919m_45415c_&site=4093919&ad=45415&r=registration',
+                'app': 'https://refpakrtsb.top/L?tag=d_4093919m_18643c_&site=4093919&ad=18643',
+                'iphone': 'https://refpakrtsb.top/L?tag=d_4093919m_45347c_&site=4093919&ad=45347'
+            },
+            'betwinner': {
+                'official': 'https://bwredir.com/1VNg?p=%2Fregistration%2F',
+                'app': 'https://bwredir.com/1VNg?p=%2Fmobile%2F',
+                'iphone': 'https://bwredir.com/1VNg?p=%2Fregistration%2F'
+            },
+            'megapari': {
+                'official': 'https://refpaiozdg.top/L?tag=d_3590876m_25437c_&site=3590876&ad=25437&r=registration',
+                'app': 'https://refpaiozdg.top/L?tag=d_3590876m_54987c_&site=3590876&ad=54987',
+                'iphone': 'https://refpaiozdg.top/L?tag=d_3590876m_56905c_&site=3590876&ad=56905'
+            }
+        };
+
+        // --- Gestionnaires d'événements pour les boutons des bookmakers (dans Créer un compte) ---
+        document.querySelectorAll('.bookmaker-main-button').forEach(button => {
+            button.addEventListener('click', (event) => {
+                const bookmaker = event.target.dataset.bookmaker;
+                const subButtonsContainer = document.getElementById(`${bookmaker}-sub-buttons`);
+                // Masquer tous les sous-boutons d'abord
+                document.querySelectorAll('.bookmaker-sub-buttons').forEach(container => {
+                    if (container.id !== subButtonsContainer.id) {
+                        container.style.display = 'none';
+                    }
+                });
+                // Afficher ou masquer les sous-boutons du bookmaker cliqué
+                subButtonsContainer.style.display = subButtonsContainer.style.display === 'flex' ? 'none' : 'flex';
+            });
+        });
+
+        document.querySelectorAll('.link-btn').forEach(button => {
+            button.addEventListener('click', (event) => {
+                const bookmakerGroup = event.target.closest('.bookmaker-group');
+                const bookmakerName = bookmakerGroup.querySelector('.bookmaker-main-button').dataset.bookmaker;
+                const linkType = event.target.dataset.type;
+                const url = affiliationLinks[bookmakerName][linkType];
+
+                if (url && url.startsWith('http')) {
+                    window.open(url, '_blank');
+                } else {
+                    alert('Lien non configuré pour le moment. Veuillez patienter.');
+                }
+            });
+        });
+
+        // JavaScript pour la fonctionnalité de copie de code promo
+        document.querySelectorAll('.copy-code-btn').forEach(button => {
+            button.addEventListener('click', async (event) => {
+                const codeToCopy = event.target.dataset.code;
+                try {
+                    await navigator.clipboard.writeText(codeToCopy);
+                    alert(`"${codeToCopy}" a été copié dans le presse-papiers !`); // This alert also needs translation
+                } catch (err) {
+                    console.error('Échec de la copie du texte : ', err);
+                    alert('Erreur lors de la copie du code. Veuillez copier manuellement : ' + codeToCopy); // This alert also needs translation
+                }
+            });
+        });
+
+
+        // --- Gestionnaire d'événements pour les sections d'instructions déroulantes ---
+        document.querySelectorAll('.instruction-title').forEach(title => {
+            title.addEventListener('click', () => {
+                const targetId = title.dataset.target;
+                const content = document.getElementById(targetId);
+                const arrow = title.querySelector('.arrow');
+
+                if (content.style.display === 'block') {
+                    content.style.display = 'none';
+                    title.classList.remove('active');
+                    arrow.style.transform = 'rotate(0deg)';
+                } else {
+                    document.querySelectorAll('.instruction-content').forEach(c => {
+                        if (c !== content) {
+                            c.style.display = 'none';
+                            c.previousElementSibling.classList.remove('active');
+                            c.previousElementSibling.querySelector('.arrow').style.transform = 'rotate(0deg)';
+                        }
+                    });
+                    content.style.display = 'block';
+                    title.classList.add('active');
+                    arrow.style.transform = 'rotate(90deg)';
+                }
+            });
+        });
+
+        // Gestionnaire d'événements pour les liens de bookmakers dans les instructions
+        document.querySelectorAll('.instruction-content .bookmaker-link').forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                showCreateAccountPage();
+            });
+        });
+        // *** Correction ajoutée pour assurer le rendu HTML des codes promo ***
+            const promoCodeTextElement = document.querySelector('.promo-code-text[data-key="yourPromoCodeText"]');
+            if (promoCodeTextElement && translations[currentLanguage] && translations[currentLanguage]['yourPromoCodeText']) {
+                promoCodeTextElement.innerHTML = translations[currentLanguage]['yourPromoCodeText'];
+            }
+
+        // --- Écouteurs d'événements principaux ---
+        newGameBtn.addEventListener('click', resetGame);
+        showAppleBtn.addEventListener('click', showRandomApple);
+
+        playGameBtn.addEventListener('click', startGame);
+        instructionsBtn.addEventListener('click', showInstructions);
+        resultsBtn.addEventListener('click', showResultsPage); // Écouteur pour le nouveau bouton Résultats
+        createAccountBtn.addEventListener('click', showCreateAccountPage);
+
+        backToMenuBtnGame.addEventListener('click', showMainMenu);
+
+        // Le lien "Cliquer ici pour vous inscrire" dans la page de jeu va maintenant vers la nouvelle page
+        registerLink.addEventListener('click', (event) => {
+            event.preventDefault();
+            showCreateAccountPage();
+        });
+
+        menuReturnBtns.forEach(button => {
+            button.addEventListener('click', showMainMenu);
+        });
+
+        // Gestion de l'écran de chargement au démarrage
+        document.addEventListener('DOMContentLoaded', () => {
+            // Cacher tous les sous-boutons des bookmakers par défaut au chargement
+            document.querySelectorAll('.bookmaker-sub-buttons').forEach(container => {
+                container.style.display = 'none';
+            });
+            createLanguageSelector(); // Create language buttons
+            setLanguage(currentLanguage); // Set initial language to English
+
+            setTimeout(() => {
+                loadingOverlay.style.opacity = '0';
+                setTimeout(() => {
+                    loadingOverlay.style.display = 'none';
+                    mainContent.style.display = 'flex';
+                    showMainMenu();
+                }, 500);
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
